@@ -2,8 +2,13 @@
 echo "Hello My BoT 529 eiei";
 $access_token = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';// Get POST body content
 $content = file_get_contents('php://input');// Parse JSON
+<<<<<<< HEAD
 $events = json_decode($content, true);// Validate parsed JSON data
 if (!is_null($events['events'])) {	// Loop through each event
+=======
+$events = json_decode($content, true);// Validate parsed JSON
+dataif (!is_null($events['events'])) {	// Loop through each event
+>>>>>>> 87f22d93d41deea102331c45c941264fd27a37b1
 foreach ($events['events'] as $event) {		// Reply only when message sent is in 'text' format
   if ($event['type'] == 'message' && $event['message']['type'] == 'text') {			// Get text sent
       $text = $event['message']['text'];			// Get replyToken
