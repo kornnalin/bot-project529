@@ -1,31 +1,45 @@
 <?php
-$gruop = "C510b4f29c790dc8e843dbeb74feb7270";
-//echo "Hello My BoT 529 eiei";
-$access_token = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';// Get POST body content
-$content = file_get_contents('php://input');// Parse JSON
-$events = json_decode($content, true);// Validate parsed JSON data
-if(!is_null($events['events'])) {	// Loop through each event
-foreach ($events['events'] as $event) {		// Reply only when message sent is in 'text' format
-  if ($event['type'] == 'message' && $event['message']['type'] == 'text') {			// Get text sent
-      $text = $event['message']['text'];			// Get replyToken
-      $replyToken = $event['replyToken'];			// Build message to reply back
-      $messages = ['type' => 'text','text' => $text];	 		// Make a POST Request to Messaging API to reply to sender
-      $sticker = ['type' => 'sticker','packageId' => 3,'stickerId' =>180];
-      $url = 'https://api.line.me/v2/bot/message/reply';
-      $data = ['replyToken' => $replyToken,'messages' => [$messages],[$sticker],];
-      $post = json_encode($data);
-      $headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
-      $ch = curl_init($url);
-      curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-      curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-      curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
-      curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
-      curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-      $result = curl_exec($ch);
-      curl_close($ch);
-      echo $result . "";
-    }
-  }
+$API_URL = 'https://api.line.me/v2/bot/message'; // URL API LINE
+$ACCESS_TOKEN = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';
+$CHANNEL_SECRET = '96164a13e36916b36e7769c5c49b6b40';
+
+$POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN); // Set HEADER
+$request = file_get_contents('php://input'); // Get request content
+$request_array = json_decode($request, true); // Decode JSON to Array
+
+//สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
+function send_reply_message($url, $post_header, $post_body)
+{
+    $ch = curl_init($url);
+    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+    $result = curl_exec($ch);
+    curl_close($ch);
+
+    return $result;
 }
-      echo "OK";
+
+//เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
+if ( sizeof($request_array['events']) > 0 ) {
+      foreach ($request_array['events'] as $event) {
+
+      $reply_message = '';
+      $reply_token = $event['replyToken'];
+      $data = [
+         'replyToken' => $reply_token,
+         'messages' => [
+            ['type' => 'text',
+             'text' => json_encode($request_array)]
+         ]
+      ];
+      $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+      $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+      echo "Result: ".$send_result."\r\n";
+   }
+}
+echo "OK";
+
 ?>
