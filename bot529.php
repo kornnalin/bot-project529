@@ -32,13 +32,16 @@ if ( sizeof($request_array['events']) > 0 ) {
       $data = [
          'replyToken' => $reply_token,
          'messages' => [
-            // ['type' => 'text','text' => json_encode($request_array)]
-            ['type' => 'text','text' => $reply_message]
+            ['type' => 'text','text' => json_encode($request_array)]
+            // ['type' => 'text','text' => $reply_message]
          ]
       ];
       echo $data."<br>";
       $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
       echo $post_body."<br>";
+      $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+      echo "Result: ".$send_result."\r\n";
+
       $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
       echo "Result: ".$send_result."\r\n";
    }
