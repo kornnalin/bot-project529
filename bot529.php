@@ -26,8 +26,10 @@ function send_reply_message($url, $post_header, $post_body)
 if ( sizeof($request_array['events']) > 0 ) {
       foreach ($request_array['events'] as $event) {
 
-      $reply_message = '';
+      $reply_message = '555';
+      echo $reply_message."<br>";
       $reply_token = $event['replyToken'];
+      echo $reply_token."<br>";
       $data = [
          'replyToken' => $reply_token,
          'messages' => [
@@ -35,7 +37,9 @@ if ( sizeof($request_array['events']) > 0 ) {
              'text' => json_encode($request_array)]
          ]
       ];
+      echo $data."<br>";
       $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+      echo $post_body."<br>";
       $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
       echo "Result: ".$send_result."\r\n";
    }
