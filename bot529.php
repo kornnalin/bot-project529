@@ -41,11 +41,8 @@ if ( sizeof($request_array['events']) > 0 ) {
       echo $post_body."<br>";
       $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
       echo "Result: ".$send_result."\r\n";
-
-      $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      echo "Result: ".$send_result."\r\n";
    }
 }
-echo "OK";
+echo "Bot529 OK";
 
 ?>
