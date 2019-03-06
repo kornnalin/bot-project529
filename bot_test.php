@@ -28,7 +28,7 @@ foreach ($request_array['$events'] as $event) {
       $reply_token = $event['replyToken'];
       $messages = ['replyToken' => $reply_token,
                     'messages' => [
-                      ['type' => 'text','text' => $text,
+                      ['type' => 'text','text' => $text],
                     ]
                   ];
       $post_body = json_encode($messages);
@@ -37,4 +37,5 @@ foreach ($request_array['$events'] as $event) {
   }
 }
 }
+echo "OK";
 ?>
