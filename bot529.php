@@ -28,26 +28,26 @@ function flexMeassge(){
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if ( sizeof($request_array['events']) > 0 ) {
       foreach ($request_array['events'] as $event) {
-
-      $reply_message =  $event['message']['text'];
-      $userID = $event['message']['source'];
-      // echo $reply_message."<br>";
-      $reply_token = $event['replyToken']; // Build message to reply back
-      $data = [
-         'replyToken' => $reply_token,
-         'messages' => [
-            // ['type' => 'text','text' => json_encode($request_array)]
-            ['type' => 'text','text' => $reply_message],
-            ['type'=> 'source','source'=> $userID]
-         ]
-      ];
-      // echo $data."<br>";
-      $post_body = json_encode($data);
-      // echo $post_body."<br>";
-      $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      // echo "Result: ".$send_result."\r\n";
+        echo $event."<br>";
+      // $reply_message =  $event['message']['text'];
+      // $userID = $event['message']['source'];
+      // // echo $reply_message."<br>";
+      // $reply_token = $event['replyToken']; // Build message to reply back
+      // $data = [
+      //    'replyToken' => $reply_token,
+      //    'messages' => [
+      //       // ['type' => 'text','text' => json_encode($request_array)]
+      //       ['type' => 'text','text' => $reply_message],
+      //       ['type'=> 'source','source'=> $userID]
+      //    ]
+      // ];
+      // // echo $data."<br>";
+      // $post_body = json_encode($data);
+      // // echo $post_body."<br>";
+      // $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+      // // echo "Result: ".$send_result."\r\n";
    }
 }
 echo "Bot 529 OK";
-echo $userID."<br>";
+// echo $userID."<br>";
 ?>
