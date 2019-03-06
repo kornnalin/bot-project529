@@ -27,9 +27,10 @@ function flexMeassge(){
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
+      $json_encode = json_encode($request_array);
+
       foreach ($request_array['events'] as $event) {
-        $json_encode = json_encode($event);
-        $userID = $event['source']['userId'];
+        $userID = $event['message']['source']['userId'];
 
         $reply_token = $event['replyToken']; // Build message to reply back
         $data = ['replyToken' => $reply_token,
