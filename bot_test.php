@@ -20,22 +20,22 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 
-if(!is_null($request_array['$events'])){
-foreach ($request_array['$events'] as $event) {
-  if($event['type'] == 'message'){
-    if($event['message']['type'] == 'text'){
-      $text = $event['message']['text'];
-      $reply_token = $event['replyToken'];
-      $messages = ['replyToken' => $reply_token,
-                    'messages' => [
-                      ['type' => 'text','text' => $text],
-                    ]
-                  ];
-      $post_body = json_encode($messages);
-      $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      }
+if(sizeof($request_array['$events'])>0){
+  foreach ($request_array['$events'] as $event) {
+    if($event['type'] == 'message'){
+      if($event['message']['type'] == 'text'){
+        $text = $event['message']['text'];
+        $reply_token = $event['replyToken'];
+        $messages = ['replyToken' => $reply_token,
+                      'messages' => [
+                        ['type' => 'text','text' => $text],
+                      ]
+                    ];
+        $post_body = json_encode($messages);
+        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        }
+    }
   }
-}
 }
 echo "OK";
 ?>
