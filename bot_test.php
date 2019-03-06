@@ -27,9 +27,9 @@ function flexMeassge(){
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
-      $json_encode = json_encode($request_array);
-
+      // $json_encode = json_encode($request_array);
       foreach ($request_array['events'] as $event) {
+          $json_encode = json_encode($request_array);
         $userID = $event['source']['userId'];
         $text = $event['message']['text'];
 
