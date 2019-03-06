@@ -28,18 +28,14 @@ function flexMeassge(){
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
       foreach ($request_array['events'] as $event) {
+      $json_encode = json_encode($request_array)
 
-      $reply_message =  $event['message']['text'];
-      $userID = $event['message']['source'];
-      // echo $reply_message."<br>";
       $reply_token = $event['replyToken']; // Build message to reply back
       $data = ['replyToken' => $reply_token,
                'messages' => [
-              ['type' => 'text','text' => json_encode($request_array)]
-              // ['type' => 'text','text' => $reply_message],
-              // ['type'=> 'source','source'=> $userID]
-         ]
-      ];
+                  ['type' => 'text','text' => $json_encode]
+                ]
+              ];
       $post_body = json_encode($data);
       $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
    }
