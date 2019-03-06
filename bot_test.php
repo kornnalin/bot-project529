@@ -25,8 +25,7 @@ function flexMeassge(){
 
 }
 
-function TagImage($json_encode,$text){
-  $reply_token = $event['replyToken']; // Build message to reply back
+function TagImage($reply_token,$json_encode,$text){
   $data = ['replyToken' => $reply_token,
            'messages' => [
              ['type' => 'text','text' => $json_encode],
@@ -48,8 +47,11 @@ if (sizeof($request_array['events']) > 0) {
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
+
+        $reply_token = $event['replyToken']; // Build message to reply back
+
         if($text == 'T' || $text == 'Tag' || $text == 'แท็ก'){
-          $tag = TagImage($json_encode,$text);
+          $tag = TagImage($reply_token,$json_encode,$text);
         }
 
    }
