@@ -29,7 +29,7 @@ function flexMeassge(){
 if (sizeof($request_array['events']) > 0) {
       foreach ($request_array['events'] as $event) {
         $json_encode = json_encode($request_array)
-        $userID = $event['source'];
+        $userID = $event['source']['userId'];
 
         $reply_token = $event['replyToken']; // Build message to reply back
         $data = ['replyToken' => $reply_token,
