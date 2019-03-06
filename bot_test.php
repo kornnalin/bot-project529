@@ -30,14 +30,14 @@ if (sizeof($request_array['events']) > 0) {
       $json_encode = json_encode($request_array);
 
       foreach ($request_array['events'] as $event) {
-        $userID = $event['message']['source']['userId'];
+        $userID = $event['source']['userId'];
 
         $reply_token = $event['replyToken']; // Build message to reply back
         $data = ['replyToken' => $reply_token,
                  'messages' => [
                   //   ['type' => 'text','text' => $userID,];
                   // ],
-                 ['type' => 'text','text' =>   $userID],
+                 ['type' => 'text','text' =>$userID],
                   ]
                 ];
         $post_body = json_encode($data);
