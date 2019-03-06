@@ -36,7 +36,7 @@ if (sizeof($request_array['events']) > 0) {
                  'messages' => [
                  //    ['type' => 'text','text' => $userID,];
                  //  ],
-                 ['type' => 'text','text' => json_encode($request_array)],
+                 ['type' => 'text','text' =>   $json_encode],
                   ]
                 ];
         $post_body = json_encode($data);
