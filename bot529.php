@@ -42,7 +42,7 @@ if ( sizeof($request_array['events']) > 0 ) {
          ]
       ];
       // echo $data."<br>";
-      $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
+      $post_body = json_encode($data);
       // echo $post_body."<br>";
       $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
       // echo "Result: ".$send_result."\r\n";
