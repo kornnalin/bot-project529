@@ -43,7 +43,7 @@ if (sizeof($request_array['events']) > 0) {
                    ['type' => 'text','text' => 'GroupID : '.$groupID],
                    ['type' => 'text','text'=> 'UserID : '.$userID],
                    ['type' => 'text','text'=>$text],
-                   ['type' => 'text','text' => $tag]; 
+                   ['type' => 'text','text' => $tag], 
                   ]
                 ];
         $post_body = json_encode($data);
