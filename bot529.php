@@ -38,7 +38,7 @@ if ( sizeof($request_array['events']) > 0 ) {
          'replyToken' => $reply_token,
          'messages' => [
             // ['type' => 'text','text' => json_encode($request_array)]
-            ['type' => 'text','text' => $userID]
+            ['type' => 'text','text' => $userID];
          ]
       ];
       // echo $data."<br>";
