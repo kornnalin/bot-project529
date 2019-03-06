@@ -22,8 +22,9 @@ function send_reply_message($url, $post_header, $post_body)
 
 if(sizeof($request_array['$events'])>0){
   foreach ($request_array['$events'] as $event) {
+
     if($event['type'] == 'message'){
-      if($event['message']['type'] == 'text'){
+      // if($event['message']['type'] == 'text'){
         $text = $event['message']['text'];
         $reply_token = $event['replyToken'];
         $messages = ['replyToken' => $reply_token,
@@ -35,7 +36,7 @@ if(sizeof($request_array['$events'])>0){
         $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
         }
     }
-  }
+  // }
 }
-echo "OK";
+echo "OK Ka";
 ?>
