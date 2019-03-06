@@ -25,15 +25,15 @@ function flexMeassge(){
 
 }
 
-function TagImage($text){
+function TagImage($json_encode,$text){
   $reply_token = $event['replyToken']; // Build message to reply back
   $data = ['replyToken' => $reply_token,
            'messages' => [
              ['type' => 'text','text' => $json_encode],
-             ['type' => 'text','text' => 'GroupID : '.$groupID],
-             ['type' => 'text','text'=> 'UserID : '.$userID],
+             // ['type' => 'text','text' => 'GroupID : '.$groupID],
+             // ['type' => 'text','text'=> 'UserID : '.$userID],
              ['type' => 'text','text'=>$text],
-             ['type' => 'text','text' => $tag],
+             // ['type' => 'text','text' => $tag],
             ]
           ];
   $post_body = json_encode($data);
@@ -44,12 +44,12 @@ function TagImage($text){
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array);
       foreach ($request_array['events'] as $event) {
-          $json_encode = json_encode($request_array);
+        $json_encode = json_encode($request_array);
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
         if($text == 'T' || $text == 'Tag' || $text == 'แท็ก'){
-          TagImage($text);
+          $tag = TagImage($json_encode,$text);
         }
 
    }
