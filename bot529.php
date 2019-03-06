@@ -30,7 +30,6 @@ if ( sizeof($request_array['events']) > 0 ) {
       foreach ($request_array['events'] as $event) {
 
       $reply_message =  $event['message']['text'];
-      $userID = $event['source'];
       // echo $reply_message."<br>";
       $reply_token = $event['replyToken']; // Build message to reply back
       $data = ['replyToken' => $reply_token,
