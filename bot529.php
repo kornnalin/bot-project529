@@ -38,7 +38,7 @@ if ( sizeof($request_array['events']) > 0 ) {
          'messages' => [
             // ['type' => 'text','text' => json_encode($request_array)]
             ['type' => 'text','text' => $reply_message],
-            ['type'=> 'source','source'=> $userID]
+            // ['type'=> 'source','source'=> $userID]
          ]
       ];
       // echo $data."<br>";
@@ -49,5 +49,4 @@ if ( sizeof($request_array['events']) > 0 ) {
    }
 }
 echo "Bot 529 OK";
-echo $userID."<br>";
 ?>
