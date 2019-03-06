@@ -25,35 +25,33 @@ function flexMeassge(){
 
 }
 
-function TagImage($reply_token,$json_encode,$text){
-  $data = ['replyToken' => $reply_token,
-           'messages' => [
-             ['type' => 'text','text' => $json_encode],
-             // ['type' => 'text','text' => 'GroupID : '.$groupID],
-             // ['type' => 'text','text'=> 'UserID : '.$userID],
-             ['type' => 'text','text'=>$text],
-             // ['type' => 'text','text' => $tag],
-            ]
-          ];
-  $post_body = json_encode($data);
-  $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+function TagImage(){
+  
 }
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array);
       foreach ($request_array['events'] as $event) {
-        $json_encode = json_encode($request_array);
+          $json_encode = json_encode($request_array);
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
-
-        $reply_token = $event['replyToken']; // Build message to reply back
-
         if($text == 'T' || $text == 'Tag' || $text == 'แท็ก'){
-          $tag = TagImage($reply_token,$json_encode,$text);
+          $tag = 'TAG';
         }
-
+        $reply_token = $event['replyToken']; // Build message to reply back
+        $data = ['replyToken' => $reply_token,
+                 'messages' => [
+                   ['type' => 'text','text' => $json_encode],
+                   ['type' => 'text','text' => 'GroupID : '.$groupID],
+                   ['type' => 'text','text'=> 'UserID : '.$userID],
+                   ['type' => 'text','text'=>$text],
+                   ['type' => 'text','text' => $tag],
+                  ]
+                ];
+        $post_body = json_encode($data);
+        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
    }
 }
 echo "Bot 529 OK";
