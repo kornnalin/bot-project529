@@ -34,7 +34,7 @@ if (sizeof($request_array['events']) > 0) {
         $reply_token = $event['replyToken']; // Build message to reply back
         $data = ['replyToken' => $reply_token,
                  'messages' => [
-                    ['type' => 'source','userId' => $userID]
+                    ['type' => 'text','text' => $userID]
                   ]
                 ];
         $post_body = json_encode($data);
