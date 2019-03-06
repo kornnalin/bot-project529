@@ -31,14 +31,14 @@ if ( sizeof($request_array['events']) > 0 ) {
       foreach ($request_array['events'] as $event) {
 
       $reply_message =  $event['message']['text'];
-      $userID = $event['message']['source'];
+      $userID = $event['text']['source'];
       // echo $reply_message."<br>";
       $reply_token = $event['replyToken']; // Build message to reply back
       $data = [
          'replyToken' => $reply_token,
          'messages' => [
             // ['type' => 'text','text' => json_encode($request_array)]
-            ['type' => 'text','text' => $userID];
+            ['type' => 'text','text' => $userID]
          ]
       ];
       // echo $data."<br>";
