@@ -22,6 +22,10 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 
+function flexMeassge(){
+
+}
+
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if ( sizeof($request_array['events']) > 0 ) {
       foreach ($request_array['events'] as $event) {
@@ -36,13 +40,13 @@ if ( sizeof($request_array['events']) > 0 ) {
             // ['type' => 'text','text' => $reply_message]
          ]
       ];
-      echo $data."<br>";
+      // echo $data."<br>";
       $post_body = json_encode($data, JSON_UNESCAPED_UNICODE);
-      echo $post_body."<br>";
+      // echo $post_body."<br>";
       $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      echo "Result: ".$send_result."\r\n";
+      // echo "Result: ".$send_result."\r\n";
    }
 }
-echo "Bot529 OK";
+echo "Bot 529 OK";
 
 ?>
