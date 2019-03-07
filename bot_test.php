@@ -70,5 +70,5 @@ if (sizeof($request_array['events']) > 0) {
         }
    }
 }
-echo "Bot 529 OK";
+echo "Bot 529 OK"; 
 ?>
