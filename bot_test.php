@@ -5,7 +5,7 @@ $CHANNEL_SECRET = '96164a13e36916b36e7769c5c49b6b40';
 $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN); // Set HEADER
 $request = file_get_contents('php://input'); // Get request content
 $request_array = json_decode($request, true); // Decode JSON to Array
-
+$keyword_tag = {'T','t','TAG','Tag','แท็ก','แท๊ก'};
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -26,7 +26,7 @@ function flexMeassge(){
 }
 
 function TagImage(){
-  
+
 }
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
@@ -37,8 +37,10 @@ if (sizeof($request_array['events']) > 0) {
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
-        if($text == 'T' || $text == 'Tag' || $text == 'แท็ก'){
-          $tag = 'TAG';
+        foreach ($keyword_tag as $tag) {
+          if($text == $tag){
+            $tag = 'TAG';
+          }
         }
         $reply_token = $event['replyToken']; // Build message to reply back
         $data = ['replyToken' => $reply_token,
