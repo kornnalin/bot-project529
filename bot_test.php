@@ -6,7 +6,7 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input'); // Get request content
 $request_array = json_decode($request, true); // Decode JSON to Array
 $keyword_tag = array('T','t','TAG','Tag','แท็ก','แท๊ก');
-echo $keyword_tag."<br>";
+echo printf($keyword_tag)."<br>";
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
 {
