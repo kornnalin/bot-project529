@@ -6,9 +6,9 @@ $POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' 
 $request = file_get_contents('php://input'); // Get request content
 $request_array = json_decode($request, true); // Decode JSON to Array
 $keyword_tag = array('T','t','TAG','Tag','แท็ก','แท๊ก');
-foreach ($keyword_tag as $key => $value) {
-  echo $value."<br>";
-}
+// foreach ($keyword_tag as $key => $value) {
+//   echo $value."<br>";
+// }
 
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
@@ -41,23 +41,24 @@ if (sizeof($request_array['events']) > 0) {
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
-        foreach ($keyword_tag as $tag) {
+        foreach ($keyword_tag as $key => $tag) {
           if($text == $tag){
             $tag = 'TAG';
+            $reply_token = $event['replyToken']; // Build message to reply back
+            $data = ['replyToken' => $reply_token,
+                     'messages' => [
+                       ['type' => 'text','text' => $json_encode],
+                       ['type' => 'text','text' => 'GroupID : '.$groupID],
+                       ['type' => 'text','text'=> 'UserID : '.$userID],
+                       ['type' => 'text','text'=>$text],
+                       ['type' => 'text','text' => $tag],
+                      ]
+                    ];
+            $post_body = json_encode($data);
+            $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
           }
         }
-        $reply_token = $event['replyToken']; // Build message to reply back
-        $data = ['replyToken' => $reply_token,
-                 'messages' => [
-                   ['type' => 'text','text' => $json_encode],
-                   ['type' => 'text','text' => 'GroupID : '.$groupID],
-                   ['type' => 'text','text'=> 'UserID : '.$userID],
-                   ['type' => 'text','text'=>$text],
-                   ['type' => 'text','text' => $tag],
-                  ]
-                ];
-        $post_body = json_encode($data);
-        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+
    }
 }
 echo "Bot 529 OK";
