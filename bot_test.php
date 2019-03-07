@@ -25,32 +25,34 @@ function flexMeassge(){
 
 }
 
-function setPostMeassge($json_encode,$userID,$groupID,$reply_token,$text){
-  $data = ['replyToken' => $reply_token,
-           'messages' => [
-             ['type' => 'text','text' => $json_encode],
-             ['type' => 'text','text' => 'GroupID : '.$groupID],
-             ['type' => 'text','text'=> 'UserID : '.$userID],
-             ['type' => 'text','text'=>$text],
-            ]
-          ];
-  $post_body = json_encode($data);
-  $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+function setPostMeassge(){
+
 }
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array);
       foreach ($request_array['events'] as $event) {
-        $json_encode = json_encode($request_array);
+          $json_encode = json_encode($request_array);
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
+
         foreach ($keyword_tag as $key => $tag) {
           if($text == $tag){
             $tag = 'TAG';
             $reply_token = $event['replyToken']; // Build message to reply back
-            $result = setPostMeassge($json_encode,$userID,$groupID,$reply_token,$text);
+            $data = ['replyToken' => $reply_token,
+                     'messages' => [
+                       ['type' => 'text','text' => $json_encode],
+                       ['type' => 'text','text' => 'GroupID : '.$groupID],
+                       ['type' => 'text','text'=> 'UserID : '.$userID],
+                       ['type' => 'text','text'=>$text],
+                       ['type' => 'text','text' => $tag],
+                      ]
+                    ];
+            $post_body = json_encode($data);
+            $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
           }
         }
    }
