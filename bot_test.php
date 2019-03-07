@@ -33,7 +33,7 @@ function setPostMeassge(){
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array);
       foreach ($request_array['events'] as $event) {
-          $json_encode = json_encode($request_array);
+        $json_encode = json_encode($request_array);
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
