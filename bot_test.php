@@ -9,7 +9,7 @@ $keyword_tag = array("T","t","TAG","Tag","แท็ก","แท๊ก","แท�
 $keyword_report = array("R","r","Report","Reports","report","reports","รายงาน","เช็คเวลาเข้าออกงาน","รายงานเวลาเข้าออกงาน");
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
-{
+[
     $ch = curl_init($url);
     curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
@@ -21,18 +21,18 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 
-function flexMeassge(){
-  {
+function flexMeassge()[
+  [
     "type": "flex",
     "altText": "Flex Message",
-    "contents": {
+    "contents": [
       "type": "bubble",
       "direction": "ltr",
-      "header": {
+      "header": [
         "type": "box",
         "layout": "vertical",
         "contents": [
-          {
+          [
             "type": "text",
             "text": "ใครมาทำงานแล้วบ้างน้า",
             "size": "lg",
@@ -40,7 +40,7 @@ function flexMeassge(){
             "weight": "bold",
             "color": "#000000"
           },
-          {
+          [
             "type": "text",
             "text": "มาดูกันเถอะ!!",
             "margin": "none",
@@ -50,21 +50,21 @@ function flexMeassge(){
           }
         ] //close contents []
       }, //close header
-      "footer": {
+      "footer": [
         "type": "box",
         "layout": "horizontal",
         "contents": [
-          {
+          [
             "type": "button",
-            "action": {
+            "action": [
               "type": "uri",
               "label": "แท็กภาพถ่าย",
               "uri": "line://app/1609271731-Ony6BL0g"
             }
           },
-          {
+          [
             "type": "button",
-            "action": {
+            "action": [
               "type": "uri",
               "label": "สถานะการแท็ก",
               "uri": "line://app/1609271731-YqDJROo0"
@@ -72,11 +72,11 @@ function flexMeassge(){
           }
         ] //close contents []
       }, //close footer
-      "styles": {
-        "header": {
+      "styles": [
+        "header": [
           "backgroundColor": "#F7DB00"
         },
-        "footer": {
+        "footer": [
           "backgroundColor": "#FBF4C0"
         }
       } //close style
@@ -85,21 +85,21 @@ function flexMeassge(){
 
 }
 
-function setPostMeassge(){
+function setPostMeassge()[
 
 }
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
-if (sizeof($request_array["events"]) > 0) {
+if (sizeof($request_array["events"]) > 0) [
       // $json_encode = json_encode($request_array);
-      foreach ($request_array["events"] as $event) {
+      foreach ($request_array["events"] as $event) [
         $json_encode = json_encode($request_array);
         $userID = $event["source"]["userId"];
         $groupID = $event["source"]["groupId"];
         $text = $event["message"]["text"];
 
-        foreach ($keyword_tag as $key => $tag) {
-          if($text == $tag){
+        foreach ($keyword_tag as $key => $tag) [
+          if($text == $tag)[
             $tag = "TAG";
             $reply_token = $event["replyToken"]; // Build message to reply back
             $data = ["replyToken" => $reply_token,
@@ -115,7 +115,7 @@ if (sizeof($request_array["events"]) > 0) {
             $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);
           }
         }
-        if($text == "hi"|| $text=="hello"){
+        if($text == "hi"|| $text=="hello")[
           $reply_token = $event["replyToken"]; // Build message to reply back
           $data = ["replyToken" => $reply_token,
                    "messages" => [
@@ -128,30 +128,30 @@ if (sizeof($request_array["events"]) > 0) {
           $post_body = json_encode($data);
           $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);
         }
-        if($text == "flex"){
+        if($text == "flex")[
           $reply_token = $event["replyToken"]; // Build message to reply back
           $data = ["replyToken" => $reply_token,
                    "messages" => [
-                     [ "type" => "bubble","header" => {"type" => "box", "layout"=> "vertical",
+                     [ "type" => "bubble","header" => ["type" => "box", "layout"=> "vertical",
                        "contents" => [
-                          {
+                          [
                             "type" => "text",
                             "text" => "header"
                           }
                         ]
                       },
-                      "hero" => { "type" => "image","url" => "https://example.com/flex/images/image.jpg","size" => "full","aspectRatio" => "2:1"},
-                      "body": {"type" => "box", "layout" => "vertical",
+                      "hero" => [ "type" => "image","url" => "https://example.com/flex/images/image.jpg","size" => "full","aspectRatio" => "2:1"},
+                      "body": ["type" => "box", "layout" => "vertical",
                         "contents" => [
-                          {
+                          [
                             "type"=> "text",
                             "text" => "body"
                           }
                         ]
                     },
-                    "footer": {"type" => "box","layout" => "vertical",
+                    "footer": ["type" => "box","layout" => "vertical",
                         "contents"=>[
-                          {
+                          [
                             "type" => "text",
                             "text" => "footer"
                           }
