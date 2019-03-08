@@ -1,12 +1,12 @@
 <?php
-$API_URL = 'https://api.line.me/v2/bot/message'; // URL API LINE
-$ACCESS_TOKEN = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';
-$CHANNEL_SECRET = '96164a13e36916b36e7769c5c49b6b40';
-$POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN); // Set HEADER
-$request = file_get_contents('php://input'); // Get request content
+$API_URL = "https://api.line.me/v2/bot/message"; // URL API LINE
+$ACCESS_TOKEN = "5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=";
+$CHANNEL_SECRET = "96164a13e36916b36e7769c5c49b6b40";
+$POST_HEADER = array("Content-Type: application/json", "Authorization: Bearer " . $ACCESS_TOKEN); // Set HEADER
+$request = file_get_contents("php://input"); // Get request content
 $request_array = json_decode($request, true); // Decode JSON to Array
-$keyword_tag = array('T','t','TAG','Tag','แท็ก','แท๊ก','แท็กภาพถ่าย','สถานะการแท็ก','Status Tag','status tag','Status tag','status Tag');
-$keyword_report = array('R','r','Report','Reports','report','reports','รายงาน','เช็คเวลาเข้าออกงาน','รายงานเวลาเข้าออกงาน');
+$keyword_tag = array("T","t","TAG","Tag","แท็ก","แท๊ก","แท็กภาพถ่าย","สถานะการแท็ก","Status Tag","status tag","Status tag","status Tag");
+$keyword_report = array("R","r","Report","Reports","report","reports","รายงาน","เช็คเวลาเข้าออกงาน","รายงานเวลาเข้าออกงาน");
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -90,110 +90,78 @@ function setPostMeassge(){
 }
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
-if (sizeof($request_array['events']) > 0) {
+if (sizeof($request_array["events"]) > 0) {
       // $json_encode = json_encode($request_array);
-      foreach ($request_array['events'] as $event) {
+      foreach ($request_array["events"] as $event) {
         $json_encode = json_encode($request_array);
-        $userID = $event['source']['userId'];
-        $groupID = $event['source']['groupId'];
-        $text = $event['message']['text'];
+        $userID = $event["source"]["userId"];
+        $groupID = $event["source"]["groupId"];
+        $text = $event["message"]["text"];
 
         foreach ($keyword_tag as $key => $tag) {
           if($text == $tag){
-            $tag = 'TAG';
-            $reply_token = $event['replyToken']; // Build message to reply back
-            $data = ['replyToken' => $reply_token,
-                     'messages' => [
-                       ['type' => 'text','text' => $json_encode],
-                       ['type' => 'text','text' => 'GroupID : '.$groupID],
-                       ['type' => 'text','text'=> 'UserID : '.$userID],
-                       ['type' => 'text','text'=>$text],
-                       ['type' => 'text','text' => $tag],
+            $tag = "TAG";
+            $reply_token = $event["replyToken"]; // Build message to reply back
+            $data = ["replyToken" => $reply_token,
+                     "messages" => [
+                       ["type" => "text","text" => $json_encode],
+                       ["type" => "text","text" => "GroupID : ".$groupID],
+                       ["type" => "text","text"=> "UserID : ".$userID],
+                       ["type" => "text","text"=>$text],
+                       ["type" => "text","text" => $tag],
                       ]
                     ];
             $post_body = json_encode($data);
-            $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+            $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);
           }
         }
-        if($text == 'hi'|| $text=='hello'){
-          $reply_token = $event['replyToken']; // Build message to reply back
-          $data = ['replyToken' => $reply_token,
-                   'messages' => [
-                     ['type' => 'text','text' => $json_encode],
-                     ['type' => 'text','text' => 'GroupID : '.$groupID],
-                     ['type' => 'text','text'=> 'UserID : '.$userID],
-                     ['type' => 'text','text'=>$text],
+        if($text == "hi"|| $text=="hello"){
+          $reply_token = $event["replyToken"]; // Build message to reply back
+          $data = ["replyToken" => $reply_token,
+                   "messages" => [
+                     ["type" => "text","text" => $json_encode],
+                     ["type" => "text","text" => "GroupID : ".$groupID],
+                     ["type" => "text","text"=> "UserID : ".$userID],
+                     ["type" => "text","text"=>$text],
                     ]
                   ];
           $post_body = json_encode($data);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+          $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);
         }
-        if($text == 'flex'){
-          $reply_token = $event['replyToken']; // Build message to reply back
-          $data = ['replyToken' => $reply_token,
-                   'messages' => [
-                    ["type": "flex",
-                    "altText": "Flex Message",
-                    "contents": {
-                      "type": "bubble",
-                      "direction": "ltr",
-                      "header": {
-                        "type": "box",
-                        "layout": "vertical",
-                        "contents": [
+        if($text == "flex"){
+          $reply_token = $event["replyToken"]; // Build message to reply back
+          $data = ["replyToken" => $reply_token,
+                   "messages" => [
+                     [ "type" => "bubble","header" => {"type" => "box", "layout"=> "vertical",
+                       "contents" => [
                           {
-                            "type": "text",
-                            "text": "ใครมาทำงานแล้วบ้างน้า",
-                            "size": "lg",
-                            "align": "center",
-                            "weight": "bold",
-                            "color": "#000000"
-                          },
-                          {
-                            "type": "text",
-                            "text": "มาดูกันเถอะ!!",
-                            "margin": "none",
-                            "size": "md",
-                            "align": "start",
-                            "color": "#A81F1F"
+                            "type" => "text",
+                            "text" => "header"
                           }
-                        ] //close contents []
-                      }, //close header
-                      "footer": {
-                        "type": "box",
-                        "layout": "horizontal",
-                        "contents": [
+                        ]
+                      },
+                      "hero" => { "type" => "image","url" => "https://example.com/flex/images/image.jpg","size" => "full","aspectRatio" => "2:1"},
+                      "body": {"type" => "box", "layout" => "vertical",
+                        "contents" => [
                           {
-                            "type": "button",
-                            "action": {
-                              "type": "uri",
-                              "label": "แท็กภาพถ่าย",
-                              "uri": "line://app/1609271731-Ony6BL0g"
-                            }
-                          },
-                          {
-                            "type": "button",
-                            "action": {
-                              "type": "uri",
-                              "label": "สถานะการแท็ก",
-                              "uri": "line://app/1609271731-YqDJROo0"
-                            }
+                            "type"=> "text",
+                            "text" => "body"
                           }
-                        ] //close contents []
-                      }, //close footer
-                      "styles": {
-                        "header": {
-                          "backgroundColor": "#F7DB00"
-                        },
-                        "footer": {
-                          "backgroundColor": "#FBF4C0"
-                        }
-                      } //close style
-                    } ]
-                    ]
+                        ]
+                    },
+                    "footer": {"type" => "box","layout" => "vertical",
+                        "contents"=>[
+                          {
+                            "type" => "text",
+                            "text" => "footer"
+                          }
+                        ]
+                      }
+                     ]
+                   ]
                   ];
           $post_body = json_encode($data);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+          $send_result = send_reply_message($API_URL."/reply, $POST_HEADER, $post_body);
         }
    }
 }
