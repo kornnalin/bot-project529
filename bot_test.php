@@ -22,6 +22,66 @@ function send_reply_message($url, $post_header, $post_body)
 }
 
 function flexMeassge(){
+  {
+    "type": "flex",
+    "altText": "Flex Message",
+    "contents": {
+      "type": "bubble",
+      "direction": "ltr",
+      "header": {
+        "type": "box",
+        "layout": "vertical",
+        "contents": [
+          {
+            "type": "text",
+            "text": "ใครมาทำงานแล้วบ้างน้า",
+            "size": "lg",
+            "align": "center",
+            "weight": "bold",
+            "color": "#000000"
+          },
+          {
+            "type": "text",
+            "text": "มาดูกันเถอะ!!",
+            "margin": "none",
+            "size": "md",
+            "align": "start",
+            "color": "#A81F1F"
+          }
+        ] //close contents []
+      }, //close header
+      "footer": {
+        "type": "box",
+        "layout": "horizontal",
+        "contents": [
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "แท็กภาพถ่าย",
+              "uri": "line://app/1609271731-Ony6BL0g"
+            }
+          },
+          {
+            "type": "button",
+            "action": {
+              "type": "uri",
+              "label": "สถานะการแท็ก",
+              "uri": "line://app/1609271731-YqDJROo0"
+            }
+          }
+        ] //close contents []
+      }, //close footer
+      "styles": {
+        "header": {
+          "backgroundColor": "#F7DB00"
+        },
+        "footer": {
+          "backgroundColor": "#FBF4C0"
+        }
+      } //close style
+    }// close content
+  }
 
 }
 
@@ -68,7 +128,74 @@ if (sizeof($request_array['events']) > 0) {
           $post_body = json_encode($data);
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
         }
+        if($text == 'flex'){
+          $reply_token = $event['replyToken']; // Build message to reply back
+          $data = ['replyToken' => $reply_token,
+                   'messages' => [
+                    ["type": "flex",
+                    "altText": "Flex Message",
+                    "contents": {
+                      "type": "bubble",
+                      "direction": "ltr",
+                      "header": {
+                        "type": "box",
+                        "layout": "vertical",
+                        "contents": [
+                          {
+                            "type": "text",
+                            "text": "ใครมาทำงานแล้วบ้างน้า",
+                            "size": "lg",
+                            "align": "center",
+                            "weight": "bold",
+                            "color": "#000000"
+                          },
+                          {
+                            "type": "text",
+                            "text": "มาดูกันเถอะ!!",
+                            "margin": "none",
+                            "size": "md",
+                            "align": "start",
+                            "color": "#A81F1F"
+                          }
+                        ] //close contents []
+                      }, //close header
+                      "footer": {
+                        "type": "box",
+                        "layout": "horizontal",
+                        "contents": [
+                          {
+                            "type": "button",
+                            "action": {
+                              "type": "uri",
+                              "label": "แท็กภาพถ่าย",
+                              "uri": "line://app/1609271731-Ony6BL0g"
+                            }
+                          },
+                          {
+                            "type": "button",
+                            "action": {
+                              "type": "uri",
+                              "label": "สถานะการแท็ก",
+                              "uri": "line://app/1609271731-YqDJROo0"
+                            }
+                          }
+                        ] //close contents []
+                      }, //close footer
+                      "styles": {
+                        "header": {
+                          "backgroundColor": "#F7DB00"
+                        },
+                        "footer": {
+                          "backgroundColor": "#FBF4C0"
+                        }
+                      } //close style
+                    } ]
+                    ]
+                  ];
+          $post_body = json_encode($data);
+          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        }
    }
 }
-echo "Bot 529 OK"; 
+echo "Bot 529 OK";
 ?>
