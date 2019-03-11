@@ -68,7 +68,22 @@ if (sizeof($request_array['events']) > 0) {
           $post_body = json_encode($data);
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
         }
+
+        if($event['memberJoined']){
+          $reply_token = $event['replyToken']; // Build message to reply back
+          $data = ['replyToken' => $reply_token,
+                   'messages' => [
+                      ['type' => 'text','text' => $json_encode],
+                     ['type' => 'text','text'=> 'UserID : '.$userID],
+                     ['type' => 'text','text'=>$text],
+                     ['type' => 'text','text'=>'memberJoined'],
+                    ]
+                  ];
+          $post_body = json_encode($data);
+          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+
+        }
    }
 }
-echo "Bot 529 OK"; 
+echo "Bot 529 OK";
 ?>
