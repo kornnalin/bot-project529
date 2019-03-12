@@ -74,9 +74,9 @@ if (sizeof($request_array["events"]) > 0) {
           $reply_token = $event["replyToken"]; // Build message to reply back
           $data = ["replyToken" => $reply_token,
           "messages" => [
-                      "type"=> "template",
+                      "type"=> "flex",
                       "altText"=> "this is a carousel template",
-                      "template"=> [
+                      "contents"=> [
                       "type"=> "carousel",
                       "actions"=> [],
                       "columns"=> [

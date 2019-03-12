@@ -22,8 +22,65 @@ function send_reply_message($url, $post_header, $post_body)
 }
 
 function flexMeassge(){
-
-}
+  "type": "flex",
+   "altText": "Flex Message",
+   "contents": {
+     "type": "bubble",
+     "direction": "ltr",
+     "header": {
+       "type": "box",
+       "layout": "vertical",
+       "contents": [
+         {
+           "type": "text",
+           "text": "ใครมาทำงานแล้วบ้างน้า",
+           "size": "lg",
+           "align": "center",
+           "weight": "bold",
+           "color": "#000000"
+         },
+         {
+           "type": "text",
+           "text": "มาดูกันเถอะ!!",
+           "margin": "none",
+           "size": "md",
+           "align": "start",
+           "color": "#A81F1F"
+         }
+       ]
+     },
+     "footer": {
+       "type": "box",
+       "layout": "horizontal",
+       "contents": [
+         {
+           "type": "button",
+           "action": {
+             "type": "uri",
+             "label": "แท็กภาพถ่าย",
+             "uri": "line://app/1609271731-Ony6BL0g"
+           }
+         },
+         {
+           "type": "button",
+           "action": {
+             "type": "uri",
+             "label": "สถานะการแท็ก",
+             "uri": "line://app/1609271731-YqDJROo0"
+           }
+         }
+       ]
+     },
+     "styles": {
+       "header": {
+         "backgroundColor": "#F7DB00"
+       },
+       "footer": {
+         "backgroundColor": "#FBF4C0"
+       }
+     }
+   }
+ }
 
 function setPostMeassge(){
 
