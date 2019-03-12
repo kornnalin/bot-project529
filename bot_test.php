@@ -72,29 +72,44 @@ if (sizeof($request_array["events"]) > 0) {
         }
         if($text == "flex"){
           $reply_token = $event["replyToken"]; // Build message to reply back
-          $data = ["replyToken" => $reply_token,"messages" => [
-                     ["type" => "bubble","header" =>
-                       ["type" => "box", "layout"=> "vertical",
-                            "contents" => [
-                              ["type" => "text","text" => "header"]
-                            ]
-                        ],
-                      "hero" => [ "type" => "image","url" => "https://example.com/flex/images/image.jpg","size" => "full","aspectRatio" => "2:1"],
-                      "body": ["type" => "box", "layout" => "vertical",
-                            "contents" => [
-                              ["type"=> "text","text" => "body"]
-                            ]
-                        ],
-                      "footer": ["type" => "box","layout" => "vertical",
-                          "contents"=>[
-                            ["type" => "text","text" => "footer"]
+          $data = ["replyToken" => $reply_token,
+          "messages" => [
+                      [
+                      "type"=> "template",
+                      "altText"=> "this is a carousel template",
+                      "template"=> [
+                      "type"=> "carousel",
+                      "actions"=> [],
+                      "columns"=> [
+                      [
+                        "thumbnailImageUrl"=> "https://cp.su.ac.th/image/crop/327",
+                        "title"=> "ภาพนี้เป็นใครน้า",
+                        "text"=> " มาช่วยกันแท็ก หาเจ้าของภาพกันเถอะ",
+                        "actions"=> [
+                          [
+                            "type"=> "message",
+                            "label"=> "คุณหมาย",
+                            "text"=> "ทำการแท็ก คุณหมาย"
+                          ],
+                          [
+                            "type"=> "message",
+                            "label"=> "คุณแอน",
+                            "text"=> "ทำการแท็ก คุณแอน"
+                          ],
+                          [
+                            "type"=> "message",
+                            "label"=> "คุณประวิม",
+                            "text"=> "ทำการแท็ก คุณประวิม"
                           ]
                         ]
                       ]
+                      ]
+                    ]
+                  ]
                    ]
                  ];
                  $post_body = json_encode($data);
-                 $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);     
+                 $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);
         }
 
 }
