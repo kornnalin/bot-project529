@@ -104,9 +104,9 @@ if (sizeof($request_array["events"]) > 0) {
                         ]
                       ]
                       ]
-                    ]
 
-                   ]
+                  ]
+                ],
                  ];
                  $post_body = json_encode($data);
                  $send_result = send_reply_message($API_URL."/reply", $POST_HEADER, $post_body);
