@@ -23,10 +23,53 @@ function send_reply_message($url, $post_header, $post_body)
 
 function flexMeassge(){
 
- }
+}
 
 function setPostMeassge(){
 
+}
+
+function getBubble( $title, $img_url, $btn_url ) {
+	$bubble = array(
+		"type"=> "bubble",
+						"header"=> array(
+						  "type"=> "box",
+						  "layout"=> "vertical",
+						  "contents"=>
+							[
+								array(
+							  "type"=> "text",
+							  "text"=> $title,
+							  "size"=> "xl"
+								)
+							]
+
+						),
+						"hero"=> array(
+						  "type"=> "image",
+						  "url"=> $img_url,
+						  "size"=> "full",
+						  "aspectRatio"=> "6:4"
+						),
+						"body"=> array(
+						  "type"=> "box",
+						  "layout"=> "vertical",
+						  "contents"=>
+							[
+								array(
+							 "type"=> "button",
+							  "style"=> "primary",
+							  "action"=> array(
+								"type"=> "uri",
+								"label"=> "Click",
+								"uri"=> $btn_url
+							  )
+								)
+							]
+
+						)
+	);
+	return $bubble;
 }
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
@@ -82,6 +125,20 @@ if (sizeof($request_array['events']) > 0) {
                   ];
           $post_body = json_encode($data);
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        }
+
+        if($text == 'b'){
+          $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+          $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+
+          $contents = array(
+            "type"=> "carousel",
+            "contents"=> [
+              $contents = getBubble( "TEMP", $img_url, $btn_url ),
+              $contents = getBubble( "HUMI", $img_url, $btn_url ),
+              $contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
+            ]
+          );
         }
    }
 }
