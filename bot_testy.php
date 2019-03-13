@@ -139,7 +139,18 @@ if (sizeof($request_array['events']) > 0) {
               $contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
             ]
           );
-        }
+          $messages = [
+            'type'=>'flex',
+            'altText'=>'asdasdasd',
+            'contents'=> $contents
+          ];
+          $data = [
+    				'replyToken' => $replyToken,
+    				'messages' => [$messages],
+    			];
+          $post_body = json_encode($data);
+          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+      }
    }
 }
 echo "Bot 529 OK";
