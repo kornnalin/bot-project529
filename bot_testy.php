@@ -70,7 +70,7 @@ function getBubble( $title, $img_url, $btn_url ) {
 						)
 	);
 	return $bubble;
-}
+};
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
