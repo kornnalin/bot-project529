@@ -149,7 +149,7 @@ if (sizeof($request_array['events']) > 0) {
             $message = flexMeassge_Tag();
             $data = [
               'replyToken' => $reply_token,
-              'messages' => [$messages],
+              'messages' => [$message],
             ]
             // $data = ['replyToken' => $reply_token,
             //          'messages' => [
