@@ -25,10 +25,6 @@ function flexMeassge(){
 
 }
 
-function setPostMeassge(){
-
-}
-
 function getBubble( $title, $img_url, $btn_url ) {
 	$bubble = array(
 		"type"=> "bubble",
@@ -113,6 +109,24 @@ if (sizeof($request_array['events']) > 0) {
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
         }
 
+        if($text == 'b' || $text == 'B'){
+          $reply_token = $event['replyToken'];
+          $contents = getBubble( "bubble", "https://www.bpicc.com/images/2018/10/28/tg1.jpg", "line://app/1609271731-kByDj4wX" );
+
+          $messages = [
+    				'type'=>'flex',
+    				'altText'=>'asdasdasd',
+    				'contents'=> $contents
+    			];
+
+          $data = [
+    				'replyToken' => $reply_token,
+    				'messages' => [$messages],
+    			];
+          $post_body = json_encode($data);
+          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        }
+
         if($event['memberJoined']){
           $reply_token = $event['replyToken']; // Build message to reply back
           $data = ['replyToken' => $reply_token,
@@ -127,30 +141,6 @@ if (sizeof($request_array['events']) > 0) {
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
         }
 
-        if($text == 'b'){
-          $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
-          $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
-
-          $contents = array(
-            "type"=> "carousel",
-            "contents"=> [
-              $contents = getBubble( "TEMP", $img_url, $btn_url ),
-              $contents = getBubble( "HUMI", $img_url, $btn_url ),
-              $contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
-            ]
-          );
-          $messages = [
-            'type'=>'flex',
-            'altText'=>'asdasdasd',
-            'contents'=> $contents
-          ];
-          $data = [
-    				'replyToken' => $replyToken,
-    				'messages' => [$messages],
-    			];
-          $post_body = json_encode($data);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      }
    }
 }
 echo "Bot 529 OK";
