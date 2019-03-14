@@ -23,11 +23,6 @@ function send_reply_message($url, $post_header, $post_body)
 
 function flexMeassge_Tag(){
   $flexMessageTag = array(
-    "type"=>"flex",
-    "altText"=>"Flex Message",
-    "contents" =>
-      [
-        array(
           "type" => "bubble",
           "direction"=>"ltr",
           "header" => array(
@@ -84,9 +79,7 @@ function flexMeassge_Tag(){
                "backgroundColor"=> "#FBF4C0"
             )
           )
-        )
-      ]
-  );
+);
   return $flexMessageTag;
 };
 
@@ -145,15 +138,15 @@ if (sizeof($request_array['events']) > 0) {
         foreach ($keyword_tag as $key => $tag) {
           if($text == $tag){
             $tag = 'TAG';
-            $reply_token = $event['replyToken']; // Build message to reply back
+            $reply_token = $event['replyToken'];
+            $contents = flexMeassge_Tag();
+            $messages = [
+              "type"=>"flex",
+              "altText"=>"Flex Message",
+      				'contents'=> $contents
+      			];
             $data = ['replyToken' => $reply_token,
-                     'messages' => [
-                       ['type' => 'text','text' => $json_encode],
-                       ['type' => 'text','text' => 'GroupID : '.$groupID],
-                       ['type' => 'text','text'=> 'UserID : '.$userID],
-                       ['type' => 'text','text'=>$text],
-                       ['type' => 'text','text' => $tag],
-                      ]
+                     'messages' => [$messages],
                     ];
             $post_body = json_encode($data);
             $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
@@ -196,7 +189,7 @@ if (sizeof($request_array['events']) > 0) {
           $reply_token = $event['replyToken']; // Build message to reply back
           $data = ['replyToken' => $reply_token,
                    'messages' => [
-                      ['type' => 'text','text' => $json_encode],
+                     ['type' => 'text','text' => $json_encode],
                      ['type' => 'text','text'=> 'UserID : '.$userID],
                      ['type' => 'text','text'=>$text],
                      ['type' => 'text','text'=>'memberJoined'],
