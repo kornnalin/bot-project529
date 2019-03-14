@@ -69,7 +69,7 @@ function flexMeassge_Tag(){
                    )
                 )
               ]
-          ),
+          )
           // "style"=>array(
           //   "header"=> array(
           //     "backgroundColor"=>"F7DB00"
