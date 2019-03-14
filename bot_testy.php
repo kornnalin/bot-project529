@@ -72,7 +72,7 @@ function flexMeassge_Tag(){
             )
   );
   return $flexMessageTag;
-}
+};
 
 function getBubble( $title, $img_url, $btn_url ) {
 	$bubble = array(
