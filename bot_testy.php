@@ -1,33 +1,14 @@
 <?php
-$API_URL = 'https://api.line.me/v2/bot/message'; // URL API LINE
-$ACCESS_TOKEN = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';
-$CHANNEL_SECRET = '96164a13e36916b36e7769c5c49b6b40';
-$POST_HEADER = array('Content-Type: application/json', 'Authorization: Bearer ' . $ACCESS_TOKEN); // Set HEADER
-$request = file_get_contents('php://input'); // Get request content
-$request_array = json_decode($request, true); // Decode JSON to Array
-$keyword_tag = array('T','t','TAG','Tag','แท็ก','แท๊ก','แท็กภาพถ่าย','สถานะการแท็ก','Status Tag','status tag','Status tag','status Tag');
-$keyword_report = array('R','r','Report','Reports','report','reports','รายงาน','เช็คเวลาเข้าออกงาน','รายงานเวลาเข้าออกงาน');
-//สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
-function send_reply_message($url, $post_header, $post_body)
-{
-    $ch = curl_init($url);
-    curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
-    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-    curl_setopt($ch, CURLOPT_HTTPHEADER, $post_header);
-    curl_setopt($ch, CURLOPT_POSTFIELDS, $post_body);
-    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
-    $result = curl_exec($ch);
-    curl_close($ch);
-    return $result;
-}
+$access_token = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';
 
-function flexMeassge(){
+$content = file_get_contents('php://input');
 
-}
+$events = json_decode($content, true);
 
-function setPostMeassge(){
+$strUserid="";
+$str="";
 
-}
+$temp=$hum="123";
 
 function getBubble( $title, $img_url, $btn_url ) {
 	$bubble = array(
@@ -72,86 +53,81 @@ function getBubble( $title, $img_url, $btn_url ) {
 	return $bubble;
 };
 
-//เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
-if (sizeof($request_array['events']) > 0) {
-      // $json_encode = json_encode($request_array);
-      foreach ($request_array['events'] as $event) {
-        $json_encode = json_encode($request_array);
-        $userID = $event['source']['userId'];
-        $groupID = $event['source']['groupId'];
-        $text = $event['message']['text'];
+if (!is_null($events['events'])) {
 
-        foreach ($keyword_tag as $key => $tag) {
-          if($text == $tag){
-            $tag = 'TAG';
-            $reply_token = $event['replyToken']; // Build message to reply back
-            $data = ['replyToken' => $reply_token,
-                     'messages' => [
-                       ['type' => 'text','text' => $json_encode],
-                       ['type' => 'text','text' => 'GroupID : '.$groupID],
-                       ['type' => 'text','text'=> 'UserID : '.$userID],
-                       ['type' => 'text','text'=>$text],
-                       ['type' => 'text','text' => $tag],
-                      ]
-                    ];
-            $post_body = json_encode($data);
-            $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-          }
-        }
+	foreach ($events['events'] as $event) {
+		if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+			$text = $event['message']['text'];
 
-        if($text == 'hi'|| $text=='hello'){
-          $reply_token = $event['replyToken']; // Build message to reply back
-          $data = ['replyToken' => $reply_token,
-                   'messages' => [
-                     ['type' => 'text','text' => $json_encode],
-                     ['type' => 'text','text' => 'GroupID : '.$groupID],
-                     ['type' => 'text','text'=> 'UserID : '.$userID],
-                     ['type' => 'text','text'=>$text],
-                    ]
-                  ];
-          $post_body = json_encode($data);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-        }
+			$strUserid = $event['source']['userId'];
 
-        if($event['memberJoined']){
-          $reply_token = $event['replyToken']; // Build message to reply back
-          $data = ['replyToken' => $reply_token,
-                   'messages' => [
-                      ['type' => 'text','text' => $json_encode],
-                     ['type' => 'text','text'=> 'UserID : '.$userID],
-                     ['type' => 'text','text'=>$text],
-                     ['type' => 'text','text'=>'memberJoined'],
-                    ]
-                  ];
-          $post_body = json_encode($data);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-        }
+			$str = "?userId=".$strUserid;
 
-        if($text == 'b'){
-          $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
-          $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+			$replyToken = $event['replyToken'];
 
-          $contents = array(
-            "type"=> "carousel",
-            "contents"=> [
-              $contents = getBubble( "TEMP", $img_url, $btn_url ),
-              $contents = getBubble( "HUMI", $img_url, $btn_url ),
-              $contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
-            ]
-          );
-          $messages = [
-            'type'=>'flex',
-            'altText'=>'asdasdasd',
-            'contents'=> $contents
-          ];
-          $data = [
-    				'replyToken' => $replyToken,
-    				'messages' => [$messages],
-    			];
-          $post_body = json_encode($data);
-          $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-      }
-   }
+			if( $text == 'All' ) {
+
+				$img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+				$btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+
+				$contents = array(
+					"type"=> "carousel",
+					"contents"=> [
+						$contents = getBubble( "TEMP", $img_url, $btn_url ),
+						$contents = getBubble( "HUMI", $img_url, $btn_url ),
+						$contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
+					]
+				);
+
+			} elseif ( $text == 'Temp' || $text == 'Temperature' ) {
+
+				$title = "Temperature ( ํC) : ".$temp;
+				$img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+				$btn_url = "line://app/1609087358-qP9xNl68";
+				$contents = getBubble( $title, $img_url, $btn_url );
+			} elseif ( $text == 'Humi' || $text == 'Humidity' ) {
+				$title = "Humidity(%): ".$hum;
+				$img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+				$btn_url = "line://app/1609087358-w9DZK1G8";
+				$contents = getBubble( $title, $img_url, $btn_url );
+			}
+
+			// if( empty($contents) ) {
+
+			// }
+
+			$messages = [
+				'type'=>'flex',
+				'altText'=>'asdasdasd',
+				'contents'=> $contents
+			];
+
+			$data = [
+				'replyToken' => $replyToken,
+				'messages' => [$messages],
+			];
+
+			$url = 'https://api.line.me/v2/bot/message/reply';
+			$post = json_encode($data);
+
+			$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+
+			$ch = curl_init($url);
+			curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+			curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+			curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+			curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+			$result = curl_exec($ch);
+			curl_close($ch);
+
+			$chg=curl_init();
+			curl_setopt($chg,CURLOPT_URL,'https://bioweb2561.herokuapp.com/firebase.php'.$str);
+			curl_exec($chg);
+			curl_close($chg);
+			echo $result . "\r\n";
+		}
+	}
 }
-echo "Bot 529 OK";
+echo "ok";
 ?>
