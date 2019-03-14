@@ -21,58 +21,58 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 
-// function flexMeassge_Tag(){
-//   $flexMessageTag = array(
-//       "type" => "bubble",
-//           "header" => array(
-//             "type"=>"box",
-//             "layout"=>"vertical",
-//             "contents"=>
-//               [
-//                 array(
-//                    "type"=> "text",
-//                    "text"=> "ใครมาทำงานแล้วบ้างน้า",
-//                    "size"=> "lg",
-//                    "align"=> "center",
-//                    "weight"=> "bold",
-//                    "color"=> "#000000"
-//                 ),
-//                 array(
-//                    "type"=> "text",
-//                    "text"=> "มาดูกันเถอะ!!",
-//                    "margin"=> "none",
-//                    "size"=> "md",
-//                    "align"=> "start",
-//                    "color"=> "#A81F1F"
-//                 )
-//               ]
-//           ),
-//           "footer"=> array(
-//             "type"=>"box",
-//             "layout"=>"horizontal",
-//             "contents"=>
-//               [
-//                 array(
-//                     "type"=> "button",
-//                     "action"=> array(
-//                       "type"=> "uri",
-//                       "label"=> "แท็กภาพถ่าย",
-//                       "uri"=>"line://app/1609271731-Ony6BL0g"
-//                     )
-//                 ),
-//                 array(
-//                   "type"=> "button",
-//                    "action"= array(
-//                      "type"=> "uri",
-//                      "label"=> "สถานะการแท็ก",
-//                      "uri"=> "line://app/1609271731-YqDJROo0"
-//                    )
-//                 )
-//               ]
-//           )
-//         );
-//   return $flexMessageTag;
-// };
+function flexMeassge_Tag(){
+  $flexMessageTag = array(
+      "type" => "bubble",
+          "header" => array(
+            "type"=>"box",
+            "layout"=>"vertical",
+            "contents"=>
+              [
+                array(
+                   "type"=> "text",
+                   "text"=> "ใครมาทำงานแล้วบ้างน้า",
+                   "size"=> "lg",
+                   "align"=> "center",
+                   "weight"=> "bold",
+                   "color"=> "#000000"
+                ),
+                array(
+                   "type"=> "text",
+                   "text"=> "มาดูกันเถอะ!!",
+                   "margin"=> "none",
+                   "size"=> "md",
+                   "align"=> "start",
+                   "color"=> "#A81F1F"
+                )
+              ]
+          ),
+          "footer"=> array(
+            "type"=>"box",
+            "layout"=>"horizontal",
+            "contents"=>
+              [
+                array(
+                    "type"=> "button",
+                    "action"=> array(
+                      "type"=> "uri",
+                      "label"=> "แท็กภาพถ่าย",
+                      "uri"=>"line://app/1609271731-Ony6BL0g"
+                    )
+                ),
+                array(
+                  "type"=> "button",
+                   "action"= array(
+                     "type"=> "uri",
+                     "label"=> "สถานะการแท็ก",
+                     "uri"=> "line://app/1609271731-YqDJROo0"
+                   )
+                )
+              ]
+          )
+);
+  return $flexMessageTag;
+};
 
 function getBubble( $title, $img_url, $btn_url ) {
 	$bubble = array(
@@ -88,6 +88,7 @@ function getBubble( $title, $img_url, $btn_url ) {
 							  "size"=> "xl"
 								)
 							]
+
 						),
 						"hero"=> array(
 						  "type"=> "image",
@@ -110,6 +111,7 @@ function getBubble( $title, $img_url, $btn_url ) {
 							  )
 								)
 							]
+
 						)
 	);
 	return $bubble;
@@ -124,23 +126,23 @@ if (sizeof($request_array['events']) > 0) {
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
 
-        foreach ($keyword_tag as $key => $tag) {
-          if($text == $tag){
-            $tag = 'TAG';
-            $reply_token = $event['replyToken'];
-            $contents = flexMeassge_Tag();
-            $messages = [
-              "type"=>"flex",
-              "altText"=>"Flex Message",
-      				'contents'=> $contents
-      			];
-            $data = ['replyToken' => $reply_token,
-                     'messages' => [$messages],
-                    ];
-            $post_body = json_encode($data);
-            $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-          }
-        }
+        // foreach ($keyword_tag as $key => $tag) {
+        //   if($text == $tag){
+        //     $tag = 'TAG';
+        //     $reply_token = $event['replyToken'];
+        //     $contents = flexMeassge_Tag();
+        //     $messages = [
+        //       "type"=>"flex",
+        //       "altText"=>"Flex Message",
+      	// 			'contents'=> $contents
+      	// 		];
+        //     $data = ['replyToken' => $reply_token,
+        //              'messages' => [$messages],
+        //             ];
+        //     $post_body = json_encode($data);
+        //     $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        //   }
+        // }
 
         if($text == 'hi'|| $text=='hello'){
           $reply_token = $event['replyToken']; // Build message to reply back
