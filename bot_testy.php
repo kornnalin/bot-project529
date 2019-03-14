@@ -70,14 +70,14 @@ function flexMeassge_Tag(){
                 )
               ]
           ),
-          "style"=>array(
-            "header"=> array(
-              "backgroundColor"=>"F7DB00"
-            ),
-            "footer"=>array(
-               "backgroundColor"=> "#FBF4C0"
-            )
-          )
+          // "style"=>array(
+          //   "header"=> array(
+          //     "backgroundColor"=>"F7DB00"
+          //   ),
+          //   "footer"=>array(
+          //      "backgroundColor"=> "#FBF4C0"
+          //   )
+          // )
 );
   return $flexMessageTag;
 };
