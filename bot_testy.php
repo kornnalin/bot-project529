@@ -46,33 +46,33 @@ function flexMeassge_Tag(){
                    "color"=> "#A81F1F"
                 )
               ]
-          ),
-          "footer"=> array(
-            "type"=>"box",
-            "layout"=>"horizontal",
-            "contents"=>
-              [
-                array(
+            ),
+            "footer"=> array(
+              "type"=>"box",
+              "layout"=>"horizontal",
+              "contents"=>
+                [
+                  array(
+                      "type"=> "button",
+                      "action"=> array(
+                        "type"=> "uri",
+                        "label"=> "แท็กภาพถ่าย",
+                        "uri"=>"line://app/1609271731-Ony6BL0g"
+                      )
+                  ),
+                  array(
                     "type"=> "button",
-                    "action"=> array(
-                      "type"=> "uri",
-                      "label"=> "แท็กภาพถ่าย",
-                      "uri"=>"line://app/1609271731-Ony6BL0g"
-                    )
-                ),
-                array(
-                  "type"=> "button",
-                   "action"= array(
-                     "type"=> "uri",
-                     "label"=> "สถานะการแท็ก",
-                     "uri"=> "line://app/1609271731-YqDJROo0"
-                   )
-                )
-              ]
-          )
-);
+                     "action"= array(
+                       "type"=> "uri",
+                       "label"=> "สถานะการแท็ก",
+                       "uri"=> "line://app/1609271731-YqDJROo0"
+                     )
+                  )
+                ]
+            )
+  );
   return $flexMessageTag;
-};
+}
 
 function getBubble( $title, $img_url, $btn_url ) {
 	$bubble = array(
