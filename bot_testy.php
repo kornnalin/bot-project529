@@ -21,58 +21,58 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 
-function flexMeassge_Tag(){
-  $flexMessageTag = array(
-      "type" => "bubble",
-          "header" => array(
-            "type"=>"box",
-            "layout"=>"vertical",
-            "contents"=>
-              [
-                array(
-                   "type"=> "text",
-                   "text"=> "ใครมาทำงานแล้วบ้างน้า",
-                   "size"=> "lg",
-                   "align"=> "center",
-                   "weight"=> "bold",
-                   "color"=> "#000000"
-                ),
-                array(
-                   "type"=> "text",
-                   "text"=> "มาดูกันเถอะ!!",
-                   "margin"=> "none",
-                   "size"=> "md",
-                   "align"=> "start",
-                   "color"=> "#A81F1F"
-                )
-              ]
-            ),
-            "footer"=> array(
-              "type"=>"box",
-              "layout"=>"horizontal",
-              "contents"=>
-                [
-                  array(
-                      "type"=> "button",
-                      "action"=> array(
-                        "type"=> "uri",
-                        "label"=> "แท็กภาพถ่าย",
-                        "uri"=>"line://app/1609271731-Ony6BL0g"
-                      )
-                  ),
-                  array(
-                    "type"=> "button",
-                     "action"= array(
-                       "type"=> "uri",
-                       "label"=> "สถานะการแท็ก",
-                       "uri"=> "line://app/1609271731-YqDJROo0"
-                     )
-                  )
-                ]
-            )
-  );
-  return $flexMessageTag;
-};
+// function flexMeassge_Tag(){
+//   $flexMessageTag = array(
+//       "type" => "bubble",
+//           "header" => array(
+//             "type"=>"box",
+//             "layout"=>"vertical",
+//             "contents"=>
+//               [
+//                 array(
+//                    "type"=> "text",
+//                    "text"=> "ใครมาทำงานแล้วบ้างน้า",
+//                    "size"=> "lg",
+//                    "align"=> "center",
+//                    "weight"=> "bold",
+//                    "color"=> "#000000"
+//                 ),
+//                 array(
+//                    "type"=> "text",
+//                    "text"=> "มาดูกันเถอะ!!",
+//                    "margin"=> "none",
+//                    "size"=> "md",
+//                    "align"=> "start",
+//                    "color"=> "#A81F1F"
+//                 )
+//               ]
+//             ),
+//             "footer"=> array(
+//               "type"=>"box",
+//               "layout"=>"horizontal",
+//               "contents"=>
+//                 [
+//                   array(
+//                       "type"=> "button",
+//                       "action"=> array(
+//                         "type"=> "uri",
+//                         "label"=> "แท็กภาพถ่าย",
+//                         "uri"=>"line://app/1609271731-Ony6BL0g"
+//                       )
+//                   ),
+//                   array(
+//                     "type"=> "button",
+//                      "action"= array(
+//                        "type"=> "uri",
+//                        "label"=> "สถานะการแท็ก",
+//                        "uri"=> "line://app/1609271731-YqDJROo0"
+//                      )
+//                   )
+//                 ]
+//             )
+//   );
+//   return $flexMessageTag;
+// };
 
 function getBubble( $title, $img_url, $btn_url ) {
 	$bubble = array(
