@@ -15,6 +15,40 @@ $groupID = array('C510b4f29c790dc8e843dbeb74feb7270' => 'PJ-529');
 //       $_SESSION['status'] = 'OK';
 //     }
 // }
-
-
+// function getBubble( $title, $btn_url ) {
+// 	$bubble = array(
+// 		"type"=> "bubble",
+// 						"header"=> array(
+// 						  "type"=> "box",
+// 						  "layout"=> "vertical",
+// 						  "contents"=>
+// 							[
+// 								array(
+// 							  "type"=> "text",
+// 							  "text"=> $title,
+// 							  "size"=> "xl"
+// 								)
+// 							]
+//
+// 						),
+// 						"body"=> array(
+// 						  "type"=> "box",
+// 						  "layout"=> "vertical",
+// 						  "contents"=>
+// 							[
+// 								array(
+// 							 "type"=> "button",
+// 							  "style"=> "primary",
+// 							  "action"=> array(
+// 								"type"=> "uri",
+// 								"label"=> "คลิ๊ก",
+// 								"uri"=> $btn_url
+// 							  )
+// 								)
+// 							]
+//
+// 						)
+// 	);
+// 	return $bubble;
+// };
 ?>
