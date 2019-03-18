@@ -148,7 +148,7 @@ if (sizeof($request_array['events']) > 0) {
                 }
               }
 
-              foreach ($$keyword_sayhi as $key => $sayhi) {
+              foreach ($keyword_sayhi as $key => $sayhi) {
                 if($text == $sayhi){
                   $text = 'สวัสดีจ้า';
                   $data = ['replyToken' => $reply_token,
@@ -175,5 +175,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting";
+echo "Fighting2";
 ?>
