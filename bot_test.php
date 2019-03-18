@@ -119,7 +119,7 @@ function getBubble( $title, $img_url, $btn_url ) {
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
-      $json_encode = json_encode($request_array['events']);
+      // $json_encode = json_encode($request_array['events']);
       foreach ($request_array['events'] as $event) {
         $je = json_encode($request_array);
         $userID = $event['source']['userId'];
@@ -129,7 +129,7 @@ if (sizeof($request_array['events']) > 0) {
 
         $data = ['replyToken' => $reply_token,
                  'messages' => [
-                   ['type' => 'text','text' => $json_encode],
+                   // ['type' => 'text','text' => $json_encode],
                    ['type' => 'text','text'=> 'UserID : '.$userID],
                    ['type' => 'text','text'=>$text],
                    ['type' => 'text','text' => $je],
