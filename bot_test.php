@@ -141,7 +141,7 @@ if (sizeof($request_array['events']) > 0) {
         if ($event['type'] == 'message') {
           if($event['message']['type'] == 'text'){
 
-              $userID = $event['source']['userId'];
+              $userID = json_encode($event['source']['userId']);
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
 
