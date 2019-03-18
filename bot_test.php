@@ -148,8 +148,8 @@ if (sizeof($request_array['events']) > 0) {
               $userID = $event['source']['userId'];
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
-              $status_userID = check_userID($userID);
-                if($status_userID == "OK"){
+              // $status_userID = check_userID($userID);
+              //   if($status_userID == "OK"){
                   foreach ($keyword_tag as $key => $tag) {
                     if($text == $tag){
                         $data = ['replyToken' => $reply_token,
@@ -162,7 +162,7 @@ if (sizeof($request_array['events']) > 0) {
                         $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                       }
                   }
-                }
+                // }
 
               foreach ($keyword_report as $key => $report) {
                 if($text == $report){
@@ -189,6 +189,35 @@ if (sizeof($request_array['events']) > 0) {
                   $post_body = json_encode($data);
                   $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                 }
+              }
+
+              if( $text == 'b' ) {
+
+                $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+                $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+
+                $contents = array(
+                  "type"=> "carousel",
+                  "contents"=> [
+                    $contents = getBubble( "TEMP", $img_url, $btn_url ),
+                    $contents = getBubble( "HUMI", $img_url, $btn_url ),
+                    $contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
+                  ]
+                );
+
+                $messages = [
+          				'type'=>'flex',
+          				'altText'=>'asdasdasd',
+          				'contents'=> $contents
+          			];
+
+          			$data = [
+          				'replyToken' => $reply_token,
+          				'messages' => [$messages],
+          			];
+
+                $post_body = json_encode($data);
+                $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
               }
           }
 
