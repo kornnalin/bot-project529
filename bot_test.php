@@ -184,9 +184,8 @@ if (sizeof($request_array['events']) > 0) {
                   $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                 }
               }
-
-              if( $text == 'b' ) {
-
+            foreach ($keyword_help as $key => $help) {
+              if( $text == $help ) {
                 $contents = array(
                   "type"=> "carousel",
                   "contents"=> [
@@ -198,7 +197,7 @@ if (sizeof($request_array['events']) > 0) {
 
                 $messages = [
           				'type'=>'flex',
-          				'altText'=>'asdasdasd',
+          				'altText'=>'Help Option',
           				'contents'=> $contents
           			];
 
@@ -210,6 +209,7 @@ if (sizeof($request_array['events']) > 0) {
                 $post_body = json_encode($data);
                 $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
               }
+            }
           }
 
         }else if($event['type'] == 'memberJoined'){
