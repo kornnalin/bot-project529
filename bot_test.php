@@ -55,7 +55,7 @@ function flexMeassge_Tag(){
                 )
               ]
             ),
-            "footer"=> array(
+            "body"=> array(
               "type"=>"box",
               "layout"=>"horizontal",
               "contents"=>
