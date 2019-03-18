@@ -120,16 +120,41 @@ function getBubble( $title, $img_url, $btn_url ) {
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array['events']);
-      foreach ($request_array['events'] as $event) {
-        $json_encode= json_encode($request_array);
-        $userID = $event['source']['userId'];
-        $groupID = $event['source']['groupId'];
-        $text = $event['message']['text'];
-        $reply_token = $event['replyToken']; // Build message to reply back
+    foreach ($request_array['events'] as $event) {
+      $json_encode= json_encode($request_array);
+      $userID = $event['source']['userId'];
+      $groupID = $event['source']['groupId'];
+      $reply_token = $event['replyToken']; // Build message to reply back
 
-        //memberJoined
-        if($event['memberJoined']){
-          $reply_token = $event['replyToken']; // Build message to reply back
+        if ($event['type'] == 'message') {
+          if($event['message']['type'] == 'text'){
+
+              $text = $event['message']['text'];
+
+              foreach ($keyword_tag as $key => $tag) {
+                if($text == $tag){
+                  $tag = 'TAG';
+                  $reply_token = $event['replyToken'];
+                  $contents = flexMeassge_Tag();
+                  $messages = [
+                    ['type' => 'text','text' => $json_encode],
+                    ['type' => 'text','text' => 'GroupID : '.$groupID],
+                    ['type' => 'text','text'=> 'UserID : '.$userID],
+                    ['type' => 'text','text'=>$text],
+                  ];
+                  $data = ['replyToken' => $reply_token,
+                           'messages' => [$messages],
+                          ];
+                  $post_body = json_encode($data);
+                  $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                }
+              }
+
+          }else if($event['message']['type'] == 'image'){
+
+          }
+
+        }else if($event['type'] == 'memberJoined'){
           $data = ['replyToken' => $reply_token,
                    'messages' => [
                      ['type' => 'text','text' => $json_encode],
@@ -138,38 +163,35 @@ if (sizeof($request_array['events']) > 0) {
                   ];
           $post_body = json_encode($data);
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-        }
 
-        //Text
-        foreach ($keyword_tag as $key => $tag) {
-          if($text == $tag){
-            $tag = 'TAG';
-            $reply_token = $event['replyToken'];
-            $contents = flexMeassge_Tag();
-            $messages = [
-              ['type' => 'text','text' => $json_encode],
-              ['type' => 'text','text' => 'GroupID : '.$groupID],
-              ['type' => 'text','text'=> 'UserID : '.$userID],
-              ['type' => 'text','text'=>$text],
-            ];
-            $data = ['replyToken' => $reply_token,
-                     'messages' => [$messages],
-                    ];
-            $post_body = json_encode($data);
-            $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-          }
         }
 
 
+        // //memberJoined
+        // if($event['type'] == 'message' && $event['message']['memberJoined'] ){
+        //   $reply_token = $event['replyToken']; // Build message to reply back
+        //   $data = ['replyToken' => $reply_token,
+        //            'messages' => [
+        //              ['type' => 'text','text' => $json_encode],
+        //              ['type' => 'text','text'=> 'UserID : '.$userID],
+        //             ]
+        //           ];
+        //   $post_body = json_encode($data);
+        //   $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        // }
+        //
 
-        $data = ['replyToken' => $reply_token,
-                 'messages' => [
-                   ['type' => 'text','text' => $json_encode],
-                   ['type' => 'text','text'=> 'UserID : '.$userID],
-                  ]
-                ];
-        $post_body = json_encode($data);
-        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+
+
+
+        // $data = ['replyToken' => $reply_token,
+        //          'messages' => [
+        //            ['type' => 'text','text' => $json_encode],
+        //            ['type' => 'text','text'=> 'UserID : '.$userID],
+        //           ]
+        //         ];
+        // $post_body = json_encode($data);
+        // $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
 
    }
 }
