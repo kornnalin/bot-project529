@@ -141,10 +141,9 @@ if (sizeof($request_array['events']) > 0) {
         if ($event['type'] == 'message') {
           if($event['message']['type'] == 'text'){
 
-              $userID = json_encode($event['source']['userId']);
+              $userID = $event['source']['userId'];
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
-
               $status_userID = check_userID($userID);
                 if($status_userID == "OK"){
                   foreach ($keyword_tag as $key => $tag) {
@@ -201,5 +200,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting";
+echo "Fighting529";
 ?>
