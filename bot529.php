@@ -29,7 +29,7 @@ function flexMeassge(){
 if ( sizeof($request_array['events']) > 0 ) {
       foreach ($request_array['events'] as $event) {
 
-      $reply_message =  $event['message'];
+      $reply_message =  $event['message']['text'];
       // echo $reply_message."<br>";
       $reply_token = $event['replyToken']; // Build message to reply back
       $data = ['replyToken' => $reply_token,
