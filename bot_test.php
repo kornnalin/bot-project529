@@ -82,7 +82,7 @@ function send_reply_message($url, $post_header, $post_body)
 //   return $flexMessageTag;
 // };
 
-function getBubble( $title, $img_url, $btn_url ) {
+function getBubble( $title, $btn_url ) {
 	$bubble = array(
 		"type"=> "bubble",
 						"header"=> array(
@@ -97,12 +97,6 @@ function getBubble( $title, $img_url, $btn_url ) {
 								)
 							]
 
-						),
-						"hero"=> array(
-						  "type"=> "image",
-						  "url"=> $img_url,
-						  "size"=> "full",
-						  "aspectRatio"=> "6:4"
 						),
 						"body"=> array(
 						  "type"=> "box",
@@ -193,14 +187,15 @@ if (sizeof($request_array['events']) > 0) {
 
               if( $text == 'b' ) {
 
-                $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
-                $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+                // $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
+                // $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
 
                 $contents = array(
                   "type"=> "carousel",
                   "contents"=> [
-                    $contents = getBubble( "TEMP", $img_url, $btn_url ),
-                    $contents = getBubble( "HUMI", $img_url, $btn_url )
+                    $contents = getBubble( "Tag", "line://app/1609271731-Ony6BL0g"),
+                    $contents = getBubble( "Status Tag", "line://app/1609271731-YqDJROo0" ),
+                    $contents = getBubble( "Report", "line://app/1609271731-kByDj4wX" ),
                   ]
                 );
 
@@ -232,5 +227,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "bot";
+echo "bot test";
 ?>
