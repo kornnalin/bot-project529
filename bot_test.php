@@ -13,8 +13,8 @@ $request = file_get_contents('php://input'); // Get request content
 $request_array = json_decode($request, true); // Decode JSON to Array
 $keyword_tag = array('T','t','TAG','Tag','แท็ก','แท๊ก','แท็กภาพถ่าย','สถานะการแท็ก','Status Tag','status tag','Status tag','status Tag');
 $keyword_report = array('R','r','Report','Reports','report','reports','รายงาน','เช็คเวลาเข้าออกงาน','รายงานเวลาเข้าออกงาน');
-$keyword_sayhi = array('hi','Hi','hello','Hello','ดีจ้า','สวัสดี','ดีค่ะ','ดีครับ','สวีดัด','อันยอง','ดีจ่ะ','ทักทาย');
-
+$keyword_sayhi = array('hi','Hi','HI','hello','Hello','HELLO','ดีจ้า','สวัสดี','ดีค่ะ','ดีครับ','สวีดัด','อันยอง','ดีจ่ะ','ทักทาย');
+$keyword_help = array('help','All','Help','HELP','all','ตัวช่วย');
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -108,7 +108,7 @@ function getBubble( $title, $btn_url ) {
 							  "style"=> "primary",
 							  "action"=> array(
 								"type"=> "uri",
-								"label"=> "คลิก",
+								"label"=> "คลิ๊ก",
 								"uri"=> $btn_url
 							  )
 								)
@@ -186,9 +186,6 @@ if (sizeof($request_array['events']) > 0) {
               }
 
               if( $text == 'b' ) {
-
-                // $img_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
-                // $btn_url = "https://www.bpicc.com/images/2018/10/28/tg1.jpg";
 
                 $contents = array(
                   "type"=> "carousel",
