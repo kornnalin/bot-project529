@@ -125,13 +125,15 @@ if (sizeof($request_array['events']) > 0) {
         $userID = $event['source']['userId'];
         $groupID = $event['source']['groupId'];
         $text = $event['message']['text'];
+        $sticker = $event['message']['sticker'];
         $reply_token = $event['replyToken']; // Build message to reply back
 
         $data = ['replyToken' => $reply_token,
                  'messages' => [
                    ['type' => 'text','text' => $json_encode],
                    ['type' => 'text','text'=> 'UserID : '.$userID],
-                   // ['type' => 'text','text'=>$text],
+                   ['type' => 'text','text'=>$text],
+                   ['type' => '"sticker','text'=>$sticker],
                   ]
                 ];
         $post_body = json_encode($data);
