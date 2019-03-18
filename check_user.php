@@ -13,7 +13,6 @@ echo $sestion_groupID."<br>";
 foreach ($userID as $key => $id) {
     if($sestion_userID == $id){
       $_SESSION['status'] = 'OK';
-      location.href = "bot_test.php";
     }
 }
 
