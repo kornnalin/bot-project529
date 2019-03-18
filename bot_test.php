@@ -132,18 +132,25 @@ if (sizeof($request_array['events']) > 0) {
               $userID = $event['source']['userId'];
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
+              //open session
+                session_start();
+                $_SESSION['userID'] = $userID ;
+                $_SESSION['groupID'] = $groupID;
 
               foreach ($keyword_tag as $key => $tag) {
                 if($text == $tag){
-                  $data = ['replyToken' => $reply_token,
-                           'messages' => [
-                             ['type' => 'text','text' => $json_encode],
-                             ['type' => 'text','text'=>$text],
-                            ]
-                          ];
-                  $post_body = json_encode($data);
-                  $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-                }
+                  location.href = "check_user.php";
+                  if($_SESSION['status'] == 'OK'){
+                    $data = ['replyToken' => $reply_token,
+                             'messages' => [
+                               ['type' => 'text','text' => $json_encode],
+                               ['type' => 'text','text'=>$text],
+                              ]
+                            ];
+                    $post_body = json_encode($data);
+                    $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                  }
+                  }
               }
 
               foreach ($keyword_report as $key => $report) {
