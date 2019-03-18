@@ -122,15 +122,14 @@ if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array['events']);
     foreach ($request_array['events'] as $event) {
       $json_encode= json_encode($request_array);
-      $userID = $event['source']['userId'];
-      $groupID = $event['source']['groupId'];
       $reply_token = $event['replyToken']; // Build message to reply back
 
         if ($event['type'] == 'message') {
+          $userID = $event['source']['userId'];
+          $groupID = $event['source']['groupId'];
+          
           if($event['message']['type'] == 'text'){
-
               $text = $event['message']['text'];
-
               foreach ($keyword_tag as $key => $tag) {
                 if($text == $tag){
                   $tag = 'TAG';
@@ -158,40 +157,11 @@ if (sizeof($request_array['events']) > 0) {
           $data = ['replyToken' => $reply_token,
                    'messages' => [
                      ['type' => 'text','text' => $json_encode],
-                     ['type' => 'text','text'=> 'UserID : '.$userID],
                     ]
                   ];
           $post_body = json_encode($data);
           $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-
         }
-
-
-        // //memberJoined
-        // if($event['type'] == 'message' && $event['message']['memberJoined'] ){
-        //   $reply_token = $event['replyToken']; // Build message to reply back
-        //   $data = ['replyToken' => $reply_token,
-        //            'messages' => [
-        //              ['type' => 'text','text' => $json_encode],
-        //              ['type' => 'text','text'=> 'UserID : '.$userID],
-        //             ]
-        //           ];
-        //   $post_body = json_encode($data);
-        //   $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
-        // }
-        //
-
-
-
-
-        // $data = ['replyToken' => $reply_token,
-        //          'messages' => [
-        //            ['type' => 'text','text' => $json_encode],
-        //            ['type' => 'text','text'=> 'UserID : '.$userID],
-        //           ]
-        //         ];
-        // $post_body = json_encode($data);
-        // $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
 
    }
 }
