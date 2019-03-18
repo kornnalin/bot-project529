@@ -124,12 +124,14 @@ if (sizeof($request_array['events']) > 0) {
       $json_encode= json_encode($request_array);
       $reply_token = $event['replyToken']; // Build message to reply back
 
-        if ($event['type'] == 'message') {
-          $userID = $event['source']['userId'];
-          $groupID = $event['source']['groupId'];
-          
-          if($event['message']['type'] == 'text'){
+      if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
+        // if ($event['type'] == 'message') {
+          // if($event['message']['type'] == 'text'){
+
+              $userID = $event['source']['userId'];
+              $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
+
               foreach ($keyword_tag as $key => $tag) {
                 if($text == $tag){
                   $tag = 'TAG';
@@ -149,9 +151,7 @@ if (sizeof($request_array['events']) > 0) {
                 }
               }
 
-          }else if($event['message']['type'] == 'image'){
-
-          }
+          // }
 
         }else if($event['type'] == 'memberJoined'){
           $data = ['replyToken' => $reply_token,
@@ -165,5 +165,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting";
+echo "bot1";
 ?>
