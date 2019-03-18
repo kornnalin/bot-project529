@@ -1,4 +1,6 @@
 <?php
+include "check_user.php";
+
 $API_URL = 'https://api.line.me/v2/bot/message'; // URL API LINE
 $ACCESS_TOKEN = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';
 $CHANNEL_SECRET = '96164a13e36916b36e7769c5c49b6b40';
@@ -119,6 +121,16 @@ function getBubble( $title, $img_url, $btn_url ) {
 	return $bubble;
 };
 
+function check_userID($userID){
+  $status = " ";
+  foreach ($userID as $key => $id) {
+    if($id == $userID){
+      $status = "OK";
+    }
+  }
+  return $status;
+}
+
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array['events']);
@@ -132,12 +144,14 @@ if (sizeof($request_array['events']) > 0) {
               $userID = $event['source']['userId'];
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
-              //open session
-                session_start();
-                $_SESSION['userID'] = $userID ;
-                $_SESSION['groupID'] = $groupID;
-                include "check_user.php";
-                if($_SESSION['status'] == 'OK'){
+
+              // //open session
+              //   session_start();
+              //   $_SESSION['userID'] = $userID ;
+              //   $_SESSION['groupID'] = $groupID;
+
+              $status_userID = check_userID($userID);
+                if($status_userID == 'OK'){
                   foreach ($keyword_tag as $key => $tag) {
                     if($text == $tag){
                         $data = ['replyToken' => $reply_token,
