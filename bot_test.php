@@ -7,6 +7,8 @@ $request = file_get_contents('php://input'); // Get request content
 $request_array = json_decode($request, true); // Decode JSON to Array
 $keyword_tag = array('T','t','TAG','Tag','แท็ก','แท๊ก','แท็กภาพถ่าย','สถานะการแท็ก','Status Tag','status tag','Status tag','status Tag');
 $keyword_report = array('R','r','Report','Reports','report','reports','รายงาน','เช็คเวลาเข้าออกงาน','รายงานเวลาเข้าออกงาน');
+$keyword_sayhi = array('hi','Hi','hello','Hello','ดีจ้า','สวัสดี','ดีค่ะ','ดีครับ','สวีดัด','อันยอง','ดีจ่ะ','ทักทาย');
+
 //สร้าง Function สำหรับ CURL ใช้ในการ Post Data ไปยัง API ของ Line
 function send_reply_message($url, $post_header, $post_body)
 {
@@ -136,8 +138,8 @@ if (sizeof($request_array['events']) > 0) {
                   $data = ['replyToken' => $reply_token,
                            'messages' => [
                              ['type' => 'text','text' => $json_encode],
-                             ['type' => 'text','text' => 'GroupID : '.$groupID],
-                             ['type' => 'text','text'=> 'UserID : '.$userID],
+                             // ['type' => 'text','text' => 'GroupID : '.$groupID],
+                             // ['type' => 'text','text'=> 'UserID : '.$userID],
                              ['type' => 'text','text'=>$text],
                             ]
                           ];
@@ -145,8 +147,22 @@ if (sizeof($request_array['events']) > 0) {
                   $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                 }
               }
+
+              foreach ($$keyword_sayhi as $key => $sayhi) {
+                if($text == $sayhi){
+                  $text = 'สวัสดีจ้า';
+                  $data = ['replyToken' => $reply_token,
+                           'messages' => [
+                              ['type' => 'text','text' => $json_encode],
+                              ['type' => 'text','text'=> $text],
+                            ]
+                          ];
+                  $post_body = json_encode($data);
+                  $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+                }
+              }
           }
-          
+
         }else if($event['type'] == 'memberJoined'){
           $data = ['replyToken' => $reply_token,
                    'messages' => [
