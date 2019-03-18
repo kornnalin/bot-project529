@@ -133,7 +133,7 @@ if (sizeof($request_array['events']) > 0) {
                    ['type' => 'text','text' => $json_encode],
                    ['type' => 'text','text'=> 'UserID : '.$userID],
                    // ['type' => 'text','text'=>$text],
-                   ['type' => 'sticker','sticker'=>$sticker],
+                   // ['type' => 'sticker','sticker'=>$sticker],
                   ]
                 ];
         $post_body = json_encode($data);
