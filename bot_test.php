@@ -124,9 +124,8 @@ if (sizeof($request_array['events']) > 0) {
       $json_encode= json_encode($request_array);
       $reply_token = $event['replyToken']; // Build message to reply back
 
-      if ($event['type'] == 'message' && $event['message']['type'] == 'text') {
-        // if ($event['type'] == 'message') {
-          // if($event['message']['type'] == 'text'){
+        if ($event['type'] == 'message') {
+          if($event['message']['type'] == 'text'){
 
               $userID = $event['source']['userId'];
               $groupID = $event['source']['groupId'];
@@ -134,25 +133,20 @@ if (sizeof($request_array['events']) > 0) {
 
               foreach ($keyword_tag as $key => $tag) {
                 if($text == $tag){
-                  $tag = 'TAG';
-                  $reply_token = $event['replyToken'];
-
-                  $messages = [
-                    ['type' => 'text','text' => $json_encode],
-                    ['type' => 'text','text' => 'GroupID : '.$groupID],
-                    ['type' => 'text','text'=> 'UserID : '.$userID],
-                    ['type' => 'text','text'=>$text],
-                  ];
                   $data = ['replyToken' => $reply_token,
-                           'messages' => [$messages],
+                           'messages' => [
+                             ['type' => 'text','text' => $json_encode],
+                             ['type' => 'text','text' => 'GroupID : '.$groupID],
+                             ['type' => 'text','text'=> 'UserID : '.$userID],
+                             ['type' => 'text','text'=>$text],
+                            ]
                           ];
                   $post_body = json_encode($data);
                   $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                 }
               }
-
-          // }
-
+          }
+          
         }else if($event['type'] == 'memberJoined'){
           $data = ['replyToken' => $reply_token,
                    'messages' => [
@@ -165,5 +159,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "bot1";
+echo "Fighting";
 ?>
