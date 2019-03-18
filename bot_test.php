@@ -145,13 +145,8 @@ if (sizeof($request_array['events']) > 0) {
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
 
-              // //open session
-              //   session_start();
-              //   $_SESSION['userID'] = $userID ;
-              //   $_SESSION['groupID'] = $groupID;
-
               $status_userID = check_userID($userID);
-                if($status_userID == 'OK'){
+                if($status_userID == "OK"){
                   foreach ($keyword_tag as $key => $tag) {
                     if($text == $tag){
                         $data = ['replyToken' => $reply_token,
@@ -165,7 +160,6 @@ if (sizeof($request_array['events']) > 0) {
                       }
                   }
                 }
-
 
               foreach ($keyword_report as $key => $report) {
                 if($text == $report){
@@ -185,7 +179,7 @@ if (sizeof($request_array['events']) > 0) {
                   $text = 'สวัสดีจ้า';
                   $data = ['replyToken' => $reply_token,
                            'messages' => [
-                              ['type' => 'text','text' => $json_encode],
+                              // ['type' => 'text','text' => $json_encode],
                               ['type' => 'text','text'=> $text],
                             ]
                           ];
@@ -207,5 +201,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting3";
+echo "Fighting Na";
 ?>
