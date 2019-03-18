@@ -124,7 +124,7 @@ function getBubble( $title, $img_url, $btn_url ) {
 function check_userID($userID){
   $status = " ";
   foreach ($userID as $key => $id) {
-    if($id == $key){
+    if($userID == $key){
       $status = "OK";
     }
   }
@@ -201,5 +201,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting5555";
+echo "Fighting";
 ?>
