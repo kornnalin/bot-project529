@@ -1,5 +1,9 @@
 <?php
-include "check_user.php";
+// include "check_user.php";
+$userID= array('U5f22114eb67ab53507dbc659a03ff468' => 'firn', 'U36a63feb7e031dc470e60bcee2631453' => 'mom',
+               'U108143288890605cb6064022ba5c0bfb' => 'jack' , '' => 'a.apisak');
+// $userID= array('U5f22114eb67ab53507dbc659a03ff468' => 'admin', 'U36a63feb7e031dc470e60bcee2631453' => 'user');
+$groupID = array('C510b4f29c790dc8e843dbeb74feb7270' => 'PJ-529');
 
 $API_URL = 'https://api.line.me/v2/bot/message'; // URL API LINE
 $ACCESS_TOKEN = '5Drfo4t/S4oZbsMzAbehjM70kuXfWe6Xp6SlLnmVbNwTrYaTJV+D3aQnhsy7CYZ/2lwbs8F90ggBbC4gx4qvAA7eUZ4IuakHjymF+hxQkbLAk9n8/mQfem614F9yf0B0amo64KSPFWTVYZTZ1w5ZfQdB04t89/1O/w1cDnyilFU=';
@@ -209,5 +213,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting";
+echo "bot";
 ?>
