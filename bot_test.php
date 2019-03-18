@@ -200,8 +200,7 @@ if (sizeof($request_array['events']) > 0) {
                   "type"=> "carousel",
                   "contents"=> [
                     $contents = getBubble( "TEMP", $img_url, $btn_url ),
-                    $contents = getBubble( "HUMI", $img_url, $btn_url ),
-                    $contents = getBubble( "HUMIasaasdasdas", $img_url, $btn_url )
+                    $contents = getBubble( "HUMI", $img_url, $btn_url )
                   ]
                 );
 
