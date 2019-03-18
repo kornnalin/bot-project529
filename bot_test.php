@@ -135,7 +135,7 @@ if (sizeof($request_array['events']) > 0) {
                 if($text == $tag){
                   $tag = 'TAG';
                   $reply_token = $event['replyToken'];
-                  $contents = flexMeassge_Tag();
+
                   $messages = [
                     ['type' => 'text','text' => $json_encode],
                     ['type' => 'text','text' => 'GroupID : '.$groupID],
@@ -195,5 +195,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Bot 529 OK";
+echo "Fighting";
 ?>
