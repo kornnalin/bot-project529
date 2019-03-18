@@ -108,7 +108,7 @@ function getBubble( $title, $btn_url ) {
 							  "style"=> "primary",
 							  "action"=> array(
 								"type"=> "uri",
-								"label"=> "Click",
+								"label"=> "คลิก",
 								"uri"=> $btn_url
 							  )
 								)
@@ -193,9 +193,9 @@ if (sizeof($request_array['events']) > 0) {
                 $contents = array(
                   "type"=> "carousel",
                   "contents"=> [
-                    $contents = getBubble( "Tag", "line://app/1609271731-Ony6BL0g"),
-                    $contents = getBubble( "Status Tag", "line://app/1609271731-YqDJROo0" ),
-                    $contents = getBubble( "Report", "line://app/1609271731-kByDj4wX" ),
+                    $contents = getBubble( "แท็กภาพถ่าย", "line://app/1609271731-Ony6BL0g"),
+                    $contents = getBubble( "สถานะการแท็ก", "line://app/1609271731-YqDJROo0" ),
+                    $contents = getBubble( "เช็คเวลาเข้าออกงาน", "line://app/1609271731-kByDj4wX" ),
                   ]
                 );
 
