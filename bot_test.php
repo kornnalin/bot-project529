@@ -161,17 +161,17 @@ if (sizeof($request_array['events']) > 0) {
         }
 
 
-        //
-        // $data = ['replyToken' => $reply_token,
-        //          'messages' => [
-        //            ['type' => 'text','text' => $json_encode],
-        //            ['type' => 'text','text'=> 'UserID : '.$userID],
-        //            // ['type' => 'text','text'=>$text],
-        //            // ['type' => 'sticker','sticker'=>$sticker],
-        //           ]
-        //         ];
-        // $post_body = json_encode($data);
-        // $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
+        
+        $data = ['replyToken' => $reply_token,
+                 'messages' => [
+                   ['type' => 'text','text' => $json_encode],
+                   ['type' => 'text','text'=> 'UserID : '.$userID],
+                   // ['type' => 'text','text'=>$text],
+                   // ['type' => 'sticker','sticker'=>$sticker],
+                  ]
+                ];
+        $post_body = json_encode($data);
+        $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
 
    }
 }
