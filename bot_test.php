@@ -144,8 +144,10 @@ if (sizeof($request_array['events']) > 0) {
               $userID = $event['source']['userId'];
               $groupID = $event['source']['groupId'];
               $text = $event['message']['text'];
+
               $status_userID = check_userID($userID);
                 if($status_userID == "OK"){
+                  echo $status_userID."<br>";
                   foreach ($keyword_tag as $key => $tag) {
                     if($text == $tag){
                         $data = ['replyToken' => $reply_token,
