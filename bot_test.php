@@ -25,15 +25,6 @@ function send_reply_message($url, $post_header, $post_body)
     return $result;
 }
 
-function check_userID($userID){
-  $status = " ";
-  foreach ($userID as $key => $id) {
-    if($id == $userID){
-      $status = "OK";
-    }
-  }
-  return $status;
-}
 // function flexMeassge_Tag(){
 //   $flexMessageTag = array(
 //       "type" => "bubble",
@@ -130,6 +121,16 @@ function getBubble( $title, $img_url, $btn_url ) {
 	return $bubble;
 };
 
+function check_userID($userID){
+  $status = " ";
+  foreach ($userID as $key => $id) {
+    if($id == $key){
+      $status = "OK";
+    }
+  }
+  return $status;
+}
+
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
       // $json_encode = json_encode($request_array['events']);
@@ -200,5 +201,5 @@ if (sizeof($request_array['events']) > 0) {
 
    }
 }
-echo "Fighting55";
+echo "Fighting5555";
 ?>
