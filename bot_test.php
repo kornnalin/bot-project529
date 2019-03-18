@@ -162,15 +162,6 @@ if (sizeof($request_array['events']) > 0) {
                         $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                       }
                   }
-                }else{
-                  $data = ['replyToken' => $reply_token,
-                           'messages' => [
-                             ['type' => 'text','text' => $json_encode],
-                             ['type' => 'text','text'=>"eiei"],
-                            ]
-                          ];
-                  $post_body = json_encode($data);
-                  $send_result = send_reply_message($API_URL.'/reply', $POST_HEADER, $post_body);
                 }
 
               foreach ($keyword_report as $key => $report) {
