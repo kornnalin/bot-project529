@@ -1,54 +1,19 @@
 <?php
-$userID= array('U5f22114eb67ab53507dbc659a03ff468' => 'firn', 'U36a63feb7e031dc470e60bcee2631453' => 'mom',
-               'U108143288890605cb6064022ba5c0bfb' => 'jack' , '' => 'a.apisak');
-// $userID= array('U5f22114eb67ab53507dbc659a03ff468' => 'admin', 'U36a63feb7e031dc470e60bcee2631453' => 'user');
-$groupID = array('C510b4f29c790dc8e843dbeb74feb7270' => 'PJ-529');
+include("connectDB.php");
+$sqlSelect = "SELECT * FROM User";
+$result = mysqli_query($connect, $sqlSelect);
 
-// session_start();
-// $sestion_userID = $_SESSION['userID'];
-// $sestion_groupID = $_SESSION['groupID'];
-// echo $sestion_userID."<br>";
-// echo $sestion_groupID."<br>";
-//
-// foreach ($userID as $key => $id) {
-//     if($sestion_userID == $id){
-//       $_SESSION['status'] = 'OK';
-//     }
-// }
-// function getBubble( $title, $btn_url ) {
-// 	$bubble = array(
-// 		"type"=> "bubble",
-// 						"header"=> array(
-// 						  "type"=> "box",
-// 						  "layout"=> "vertical",
-// 						  "contents"=>
-// 							[
-// 								array(
-// 							  "type"=> "text",
-// 							  "text"=> $title,
-// 							  "size"=> "xl"
-// 								)
-// 							]
-//
-// 						),
-// 						"body"=> array(
-// 						  "type"=> "box",
-// 						  "layout"=> "vertical",
-// 						  "contents"=>
-// 							[
-// 								array(
-// 							 "type"=> "button",
-// 							  "style"=> "primary",
-// 							  "action"=> array(
-// 								"type"=> "uri",
-// 								"label"=> "คลิ๊ก",
-// 								"uri"=> $btn_url
-// 							  )
-// 								)
-// 							]
-//
-// 						)
-// 	);
-// 	return $bubble;
-// };
+if (mysqli_num_rows($result) > 0) {
+    while($row = mysqli_fetch_assoc($result)) {
+      $userID = $row["userID"];
+      $name = $row["name"];
+      $status = $row["status"];
+      echo "----------------------------<br>";
+      echo $userID."<br>";
+      echo $name."<br>";
+      echo $status."<br>";
+      echo "----------------------------<br>";
+    }
+}
+
 ?>

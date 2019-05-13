@@ -1,8 +1,6 @@
 <?php
-include "check_user.php";
-// $userID= array('U5f22114eb67ab53507dbc659a03ff468' => 'firn', 'U36a63feb7e031dc470e60bcee2631453' => 'mom',
-//                'U108143288890605cb6064022ba5c0bfb' => 'jack' , '' => 'a.apisak');
-// // $userID= array('U5f22114eb67ab53507dbc659a03ff468' => 'admin', 'U36a63feb7e031dc470e60bcee2631453' => 'user');
+// include("check_user.php");
+include("connectDB.php");
 // $groupID = array('C510b4f29c790dc8e843dbeb74feb7270' => 'PJ-529');
 
 $API_URL = 'https://api.line.me/v2/bot/message'; // URL API LINE
@@ -120,14 +118,16 @@ function getBubble( $title, $btn_url ) {
 };
 
 function check_userID($userID){
-  $status = " ";
-  foreach ($userID as $key => $id) {
-    if($userID == $key){
-      $status = "OK";
-    }
-  }
-  return $status;
+  include("check_report.php");
+  // $status = " ";
+  // foreach ($userID as $key => $id) {
+  //   if($userID == $key){
+  //     $status = "OK";
+  //   }
+  // }
+  // return $status;
 }
+
 
 //เป็นการ Get ข้อมูลที่ได้จากการที่ User ที่มีการกระทำใน Channel
 if (sizeof($request_array['events']) > 0) {
